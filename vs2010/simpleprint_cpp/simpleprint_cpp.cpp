@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[])
 {
-	printf("Hello, simple_cpp!\n");
+	printf("Hello, simpleprint_cpp!\n");
 	return 0;
 }
 
