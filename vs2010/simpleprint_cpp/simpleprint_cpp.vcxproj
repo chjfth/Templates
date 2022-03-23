@@ -58,7 +58,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <BuildLog>
-      <Path>__$(IntDir)$(MSBuildProjectName).build.log</Path>
+      <Path>$(IntDir)__$(MSBuildProjectName).build.log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
   <!-- 
