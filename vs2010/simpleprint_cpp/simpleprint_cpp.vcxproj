@@ -57,6 +57,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <BuildLog>
+      <Path>__$(IntDir)$(MSBuildProjectName).build.log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <!-- 
   	Compiler Behavior Settings : Debug 
