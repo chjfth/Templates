@@ -10,6 +10,14 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug ANSI|Win32">
+      <Configuration>Debug ANSI</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release ANSI|Win32">
+      <Configuration>Release ANSI</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <!-- x64 -->
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -17,6 +25,14 @@
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug ANSI|x64">
+      <Configuration>Debug ANSI</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release ANSI|x64">
+      <Configuration>Release ANSI</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -28,11 +44,11 @@
   <PropertyGroup Label="Configuration">
     <ProjectGuid>{CCCCCCCC-0000-0000-0001-111111000000}</ProjectGuid>
     <ProjectName>HelloWin</ProjectName>
-    <TargetName>HelloWin</TargetName>
+     <TargetName>HelloWin</TargetName>
     <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   
+  <!-- Debug or Release -->
   <PropertyGroup Condition=" $(Configuration.StartsWith('Debug'))" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
@@ -41,6 +57,15 @@
     <!-- note: WholeProgramOptimization=true causes `dumpbin /linkermember:1 xxx.lib` to output nothing. -->
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
+
+  <!-- Unicode or ANSI(MBCS) -->
+  <PropertyGroup Condition="!$(Configuration.Contains('ANSI'))" Label="Configuration">
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" $(Configuration.Contains('ANSI'))" Label="Configuration">
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+
   <!---->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -56,17 +81,10 @@
      <IntDir>$(ProjectDir)obj-vc$(PlatformToolsetVersion)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin-vc$(PlatformToolsetVersion)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
-  <!-- Better build.log file naming -->
-  <ItemDefinitionGroup>
-    <BuildLog>
-      <Path>$(IntDir)__$(MSBuildProjectName).build.log</Path>
-    </BuildLog>
-  </ItemDefinitionGroup>
   
   <!-- 
-  	Compiler and Linker options
-   -->
-  <!-- Debug/Release shared options -->
+  	Compiler/Linker Behavior Settings : shared 
+  -->
   <ItemDefinitionGroup>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -88,16 +106,26 @@
       <ImportLibrary>$(OutDir)$(TargetName)--imp.lib</ImportLibrary>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
+    <!-- Better build.log file naming -->
+    <BuildLog>
+      <Path>$(IntDir)__$(MSBuildProjectName).build.log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
-  <!-- Debug-only options -->
+  <!-- 
+  	Compiler Behavior Settings : Debug 
+  -->
   <ItemDefinitionGroup Condition=" $(Configuration.StartsWith('Debug'))">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;DBG=1%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
+    <Link>
+    </Link>
   </ItemDefinitionGroup>
-  <!-- Release-only options -->
+  <!-- 
+  	Compiler Behavior Settings : Release 
+  -->
   <ItemDefinitionGroup Condition="!$(Configuration.StartsWith('Debug'))">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -109,6 +137,10 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+
+  <!-- 
+    Source file list:
+   -->
   <ItemGroup>
     <ClCompile Include="HelloWin.cpp" />
   </ItemGroup>
@@ -119,6 +151,7 @@
     <None Include="HelloWin1.ico" />
   </ItemGroup>
 
+  <!-- MSBuild system stock Cpp.targets -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
