@@ -64,9 +64,9 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	RegisterClass (&wndclass);
 	 
-	hwnd = CreateWindow (szAppName, // window class name
-		TEXT ("The Hello Program"), // window caption
-		WS_OVERLAPPEDWINDOW,        // window style
+	hwnd = CreateWindow (szAppName,    // window class name
+		TEXT ("The HelloWin Program"), // window caption
+		WS_OVERLAPPEDWINDOW,           // window style
 		20,              // initial x position
 		20,              // initial y position
 		400,             // initial x size
