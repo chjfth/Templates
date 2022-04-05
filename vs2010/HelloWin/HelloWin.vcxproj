@@ -26,7 +26,7 @@
   <!-- User project properties -->
   
   <PropertyGroup Label="Configuration">
-    <ProjectGuid>{CCCCCCCC-0000-0000-0000-111111000000}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-0000-0001-111111000000}</ProjectGuid>
     <ProjectName>HelloWin</ProjectName>
     <TargetName>HelloWin</TargetName>
     <ConfigurationType>Application</ConfigurationType>
