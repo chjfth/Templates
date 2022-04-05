@@ -35,7 +35,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="!$(Configuration.StartsWith('Debug'))" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <!-- note: WholeProgramOptimization=true causes `dumpbin /linkermember:1 xxx.lib` to output nothing. -->
+    <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <!---->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
