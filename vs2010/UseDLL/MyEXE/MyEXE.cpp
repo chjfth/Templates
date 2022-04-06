@@ -3,12 +3,17 @@
 #include <tchar.h>
 #include <locale.h>
 
+#include <MyAPI.h>
+
 int _tmain(int argc, TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
 	
-	_tprintf(_T("Hello, MyEXE!\n"));
-	_tprintf(_T("sizeof(TCHAR)=%d\n"), sizeof(TCHAR));
+	MyAPI_version_st vst = {};
+	MyAPI_getversion(&vst);
+
+	_tprintf(_T("EXE: Using MyAPI version: %d.%d.%d.%d\n"), vst.major, vst.minor, vst.build, vst.extra);
+
 	return 0;
 }
 
