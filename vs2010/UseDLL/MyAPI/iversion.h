@@ -1,6 +1,8 @@
 #ifndef __MyAPI_iversion_h_
 #define __MyAPI_iversion_h_
 
+// This iversion.h is considered internal to MyAPI implementation.
+// API user should call MyAPI_getversion() to query its version at runtime.
 
 #define THISLIB_VMAJOR 1
 #define THISLIB_VMINOR 0
