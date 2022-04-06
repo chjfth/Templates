@@ -1,0 +1,29 @@
+#ifndef __MyAPI_iversion_h_
+#define __MyAPI_iversion_h_
+
+
+#define THISLIB_VMAJOR 1
+#define THISLIB_VMINOR 0
+#define THISLIB_VBUILD 0
+#define THISLIB_VEXTRA 0
+
+#define THISLIBstr__(n) #n
+#define THISLIBstr(n) THISLIBstr__(n)
+
+// The following 4 are used in .rc, 's' implies string.
+#define THISLIB_VMAJORs THISLIBstr(THISLIB_VMAJOR)
+#define THISLIB_VMINORs THISLIBstr(THISLIB_VMINOR)
+#define THISLIB_VBUILDs THISLIBstr(THISLIB_VBUILD)
+#define THISLIB_VEXTRAs THISLIBstr(THISLIB_VEXTRA)
+
+#define THISLIB_NAME "MyAPI"
+
+enum {
+	MyAPI_vmajor = THISLIB_VMAJOR,
+	MyAPI_vminor = THISLIB_VMINOR,
+	MyAPI_vbuild = THISLIB_VBUILD,
+	MyAPI_vextra = THISLIB_VEXTRA,
+};
+
+
+#endif
