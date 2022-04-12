@@ -8,7 +8,7 @@
 #include "MyAPI.h"
 
 DLLEXPORT_MyAPI
-bool MyAPI_getversion(struct MyAPI_version_st *pver)
+bool DLL_CALLCONV MyAPI_getversion(struct MyAPI_version_st *pver)
 {
 	if(!pver)
 		return false;
@@ -22,7 +22,7 @@ bool MyAPI_getversion(struct MyAPI_version_st *pver)
 }
 
 DLLEXPORT_MyAPI
-void MyAPI_printversion()
+void DLL_CALLCONV MyAPI_printversion()
 {
 	MyAPI_version_st vst = {};
 	MyAPI_getversion(&vst);

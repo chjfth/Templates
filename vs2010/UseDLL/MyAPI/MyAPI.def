@@ -1,0 +1,3 @@
+EXPORTS
+	MyAPI_getversion
+	MyAPI_printversion
