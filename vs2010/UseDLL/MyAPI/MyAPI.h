@@ -10,16 +10,20 @@ extern"C" {
 #define DLLEXPORT_MyAPI
 #endif
 
+#ifndef DLL_CALLCONV // DLL function calling convention
+#define DLL_CALLCONV __stdcall
+#endif
+	
 struct MyAPI_version_st 
 {
 	int major, minor, build, extra;
 };
 
 DLLEXPORT_MyAPI
-bool MyAPI_getversion(struct MyAPI_version_st *pver);
+bool DLL_CALLCONV MyAPI_getversion(struct MyAPI_version_st *pver);
 
 DLLEXPORT_MyAPI
-void MyAPI_printversion();
+void DLL_CALLCONV MyAPI_printversion();
 
 
 
