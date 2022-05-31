@@ -8,7 +8,7 @@ extern"C" {
 
 struct MyAPI_version_st 
 {
-	int major, minor, build, extra;
+	int major, minor, patch, extra;
 };
 
 

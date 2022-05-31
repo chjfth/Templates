@@ -15,7 +15,7 @@ bool MyAPI_getversion(struct MyAPI_version_st *pver)
 
 	pver->major = MyAPI_vmajor;
 	pver->minor = MyAPI_vminor;
-	pver->build = MyAPI_vpatch;
+	pver->patch = MyAPI_vpatch;
 	pver->extra = MyAPI_vextra;
 
 	return true;
