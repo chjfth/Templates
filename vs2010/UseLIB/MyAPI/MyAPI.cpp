@@ -15,7 +15,7 @@ bool MyAPI_getversion(struct MyAPI_version_st *pver)
 
 	pver->major = MyAPI_vmajor;
 	pver->minor = MyAPI_vminor;
-	pver->build = MyAPI_vbuild;
+	pver->build = MyAPI_vpatch;
 	pver->extra = MyAPI_vextra;
 
 	return true;
@@ -26,5 +26,5 @@ void MyAPI_printversion()
 {
 	MyAPI_version_st vst = {};
 	MyAPI_getversion(&vst);
-	printf("MyAPI version: %d.%d.%d.%d\n", vst.major, vst.minor, vst.build, vst.extra);
+	printf("MyAPI version: %d.%d.%d.%d\n", vst.major, vst.minor, vst.patch, vst.extra);
 }

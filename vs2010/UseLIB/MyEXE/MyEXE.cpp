@@ -12,7 +12,7 @@ int _tmain(int argc, TCHAR* argv[])
 	MyAPI_version_st vst = {};
 	MyAPI_getversion(&vst);
 
-	_tprintf(_T("EXE: Using MyAPI(lib) version: %d.%d.%d.%d\n"), vst.major, vst.minor, vst.build, vst.extra);
+	_tprintf(_T("EXE: Using MyAPI(lib) version: %d.%d.%d.%d\n"), vst.major, vst.minor, vst.patch, vst.extra);
 
 	return 0;
 }
