@@ -37,8 +37,6 @@
     </ProjectConfiguration>
   </ItemGroup>
 
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  
   <!-- User project properties -->
   
   <PropertyGroup Label="Globals">
@@ -48,6 +46,10 @@
     <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   
+  <!-- Microsoft.Cpp.Default.props 
+  	For Linux .vcxproj, this should be after above "global" Properties. -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
   <!-- Debug or Release -->
   <PropertyGroup Condition="$(Configuration.StartsWith('Debug'))" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
