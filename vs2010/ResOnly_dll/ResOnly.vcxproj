@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <!-- Win32(x86) -->
@@ -36,18 +36,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  
   <!-- User project properties -->
-  
   <PropertyGroup Label="Configuration">
     <ProjectGuid>{CCCCCCCC-0000-0000-0000-202209220001}</ProjectGuid>
     <ProjectName>ResOnly</ProjectName>
-     <TargetName>ResOnly</TargetName>
+    <TargetName>ResOnly</TargetName>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
-  
   <!-- Debug or Release -->
   <PropertyGroup Condition=" $(Configuration.StartsWith('Debug'))" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -57,7 +53,6 @@
     <!-- note: WholeProgramOptimization=true causes `dumpbin /linkermember:1 xxx.lib` to output nothing. -->
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
-
   <!-- Unicode or ANSI(MBCS) -->
   <PropertyGroup Condition="!$(Configuration.Contains('ANSI'))" Label="Configuration">
     <CharacterSet>Unicode</CharacterSet>
@@ -65,7 +60,6 @@
   <PropertyGroup Condition=" $(Configuration.Contains('ANSI'))" Label="Configuration">
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-
   <!---->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -74,14 +68,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-
   <!-- Better .obj/.exe/.pdb output folder structure -->
   <PropertyGroup>
     <LinkIncremental>false</LinkIncremental>
-     <IntDir>$(ProjectDir)obj-$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)obj-$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin-$(PlatformToolset)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
-  
   <!-- 
   	Compiler/Linker Behavior Settings : shared 
   -->
@@ -108,21 +100,18 @@
     <Link>
     </Link>
   </ItemDefinitionGroup>
-
   <!-- 
     Source file list:
    -->
   <ItemGroup>
     <ResourceCompile Include="ResOnly.rc" />
   </ItemGroup>
-
   <!-- MSBuild system stock Cpp.targets -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-
   <!-- import VSPG start -->
-                                        <!-- 
+  <!-- 
   <PropertyGroup>
     <VSPG_BootsDir_NoTBS>$(SolutionDir)_VSPG\boots</VSPG_BootsDir_NoTBS>
   </PropertyGroup>
