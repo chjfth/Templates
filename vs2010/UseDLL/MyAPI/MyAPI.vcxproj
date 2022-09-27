@@ -100,7 +100,7 @@
       <ProgramDataBaseFileName Condition="'$(TargetExt)'!='.lib' ">$(IntDir)$(TargetName).$(PlatformToolset).pdb</ProgramDataBaseFileName>
 
       <PreprocessorDefinitions>WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions>DLLEXPORT_MyAPI=__declspec(dllexport);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>;;DLLEXPORT_MyAPI=__declspec(dllexport);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
