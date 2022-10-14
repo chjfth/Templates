@@ -36,16 +36,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+
   <!-- User project properties -->
+
   <PropertyGroup Label="Configuration">
     <ProjectGuid>{20221014-0000-0000-0001-111111000000}</ProjectGuid>
     <ProjectName>DialogAsMainUI</ProjectName>
     <TargetName>DialogAsMainUI</TargetName>
     <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
+
   <!-- Microsoft.Cpp.Default.props 
   	For Linux .vcxproj, this should be after above "global" Properties. -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
   <!-- Debug or Release -->
   <PropertyGroup Condition=" $(Configuration.StartsWith('Debug'))" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -55,6 +59,7 @@
     <!-- note: WholeProgramOptimization=true causes `dumpbin /linkermember:1 xxx.lib` to output nothing. -->
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
+
   <!-- Unicode or ANSI(MBCS) -->
   <PropertyGroup Condition="!$(Configuration.Contains('ANSI'))" Label="Configuration">
     <CharacterSet>Unicode</CharacterSet>
@@ -62,7 +67,9 @@
   <PropertyGroup Condition=" $(Configuration.Contains('ANSI'))" Label="Configuration">
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+
   <!---->
+
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,16 +77,21 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+
   <!-- Better .obj/.exe/.pdb output folder structure -->
+
   <PropertyGroup>
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(ProjectDir)obj-$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
+     <IntDir>$(ProjectDir)obj-$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin-$(PlatformToolset)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
+
   <!-- 
   	Compiler/Linker Behavior Settings : shared 
   -->
+
   <ItemDefinitionGroup>
+ 
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDataBase</DebugInformationFormat>
@@ -102,11 +114,14 @@
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='x64'">;;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ComCtl32.Lib;;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+ 
     <!-- Better build.log file naming -->
     <BuildLog>
       <Path>$(IntDir)__$(MSBuildProjectName).build.log</Path>
     </BuildLog>
+ 
   </ItemDefinitionGroup>
+ 
   <!-- 
   	Compiler Behavior Settings : Debug 
   -->
@@ -119,6 +134,7 @@
     <Link>
     </Link>
   </ItemDefinitionGroup>
+ 
   <!-- 
   	Compiler Behavior Settings : Release 
   -->
@@ -133,9 +149,11 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+ 
   <!-- 
     Source file list:
    -->
+ 
   <ItemGroup>
     <ClCompile Include="DialogAsMainUI.cpp" />
   </ItemGroup>
@@ -151,12 +169,14 @@
     <ClInclude Include="JULayout2.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
+ 
   <!-- MSBuild system stock Cpp.targets -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+ 
   <!-- import VSPG start -->
-  <!-- 
+                                        <!-- 
   <PropertyGroup>
     <VSPG_BootsDir_NoTBS>$(SolutionDir)_VSPG\boots</VSPG_BootsDir_NoTBS>
   </PropertyGroup>
