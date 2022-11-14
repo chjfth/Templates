@@ -1,5 +1,5 @@
 /*------------------------------------------------------------
-   HELLOWIN.C -- Displays "Hello, Windows 98!" in client area
+   HelloWin.cpp -- Displays "Hello, Windows 98!" in client area
 				 (c) Charles Petzold, 1998
 				 
    HelloWin.cpp -- A bit modification for easier debugging.
@@ -42,8 +42,8 @@ void vaDbg(const TCHAR *fmt, ...)
 
 LRESULT CALLBACK WndProc (HWND, UINT, WPARAM, LPARAM) ;
 
-int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
-					PSTR szCmdLine, int iCmdShow)
+int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					PTSTR szCmdLine, int iCmdShow)
 {
 	(void)hPrevInstance; (void)szCmdLine; 
 	static TCHAR szAppName[] = TEXT ("HelloWin") ;
