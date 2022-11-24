@@ -165,7 +165,6 @@
     <None Include="DialogAsMainUI1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CmnHdr-Jeffrey.h" />
     <ClInclude Include="JULayout2.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

@@ -6,8 +6,6 @@
 #include "resource.h"
 #include "iversion.h"
 
-#include "CmnHdr-Jeffrey.h"
-
 #define JULAYOUT_IMPL
 #include "JULayout2.h"
 
@@ -47,6 +45,16 @@ void Dlg_OnCommand(HWND hdlg, int id, HWND hwndCtl, UINT codeNotify)
 	}}
 }
 
+// Sets the dialog box icons
+inline void chSETDLGICONS(HWND hwnd, int idi) {
+	SendMessage(hwnd, WM_SETICON, TRUE,  (LPARAM)
+		LoadIcon((HINSTANCE) GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
+		MAKEINTRESOURCE(idi)));
+	SendMessage(hwnd, WM_SETICON, FALSE, (LPARAM)
+		LoadIcon((HINSTANCE) GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
+		MAKEINTRESOURCE(idi)));
+}
+
 BOOL Dlg_OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam) 
 {
 	DlgPrivate_st *prdata = (DlgPrivate_st*)lParam;
@@ -76,8 +84,8 @@ INT_PTR WINAPI Dlg_Proc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) 
 	{
-		chHANDLE_DLGMSG(hdlg, WM_INITDIALOG,    Dlg_OnInitDialog);
-		chHANDLE_DLGMSG(hdlg, WM_COMMAND,       Dlg_OnCommand);
+		HANDLE_MSG(hdlg, WM_INITDIALOG,    Dlg_OnInitDialog);
+		HANDLE_MSG(hdlg, WM_COMMAND,       Dlg_OnCommand);
 	}
 	return FALSE;
 }
