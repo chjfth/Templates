@@ -158,7 +158,7 @@
     <ClCompile Include="DialogAsMainUI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="DialogAsMainUI.rc" />
+    <ResourceCompile Include="DialogAsMainUI1.rc" />
     <ResourceCompile Include="iversion.rc" />
   </ItemGroup>
   <ItemGroup>
