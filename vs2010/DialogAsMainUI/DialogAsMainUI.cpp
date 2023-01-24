@@ -6,6 +6,8 @@
 #include "resource.h"
 #include "iversion.h"
 
+#include "utils.h"
+
 #define JULAYOUT_IMPL
 #include "JULayout2.h"
 
@@ -91,9 +93,12 @@ INT_PTR WINAPI Dlg_Proc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 }
 
 
-int WINAPI _tWinMain(HINSTANCE hinstExe, HINSTANCE, PTSTR pszCmdLine, int) 
+int WINAPI _tWinMain(HINSTANCE hinstExe, HINSTANCE, PTSTR szParams, int) 
 {
 	g_hinstExe = hinstExe;
+
+	const TCHAR *szfullcmdline = GetCommandLine();
+	vaDbgTs(_T("GetCommandLine() = %s"), szfullcmdline);
 
 	DlgPrivate_st dlgdata = { _T("Hello.\r\nPrivate string here.") };
 	DialogBoxParam(hinstExe, MAKEINTRESOURCE(IDD_WINMAIN), NULL, Dlg_Proc, (LPARAM)&dlgdata);
