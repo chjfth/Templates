@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by DialogAsMainUI.rc
+// Used by DialogAsMainUI1.rc
 //
 #define IDI_WINMAIN                     100
 #define IDD_WINMAIN                     101
