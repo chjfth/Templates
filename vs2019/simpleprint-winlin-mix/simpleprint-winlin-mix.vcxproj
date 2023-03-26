@@ -162,7 +162,7 @@
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj.linux/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin.linux/$(Platform)/$(Configuration)</RemoteOutRelDir>
 
-    <!-- This is to workround a possible VS2019 16.11 VSLinux bug: 
+    <!-- [20230326.R1] This is to workround a possible VS2019 16.11 VSLinux bug: 
       When launching WSL_1_0 exe, VSIDE will go hard to launch exe inside:
         /mnt/d/gitw/Templates/vs2019/simpleprint-winlin-mix/bin/x64/Debug-WSL-gcc
       instead of the correct:
@@ -172,6 +172,11 @@
       into simpleprint-winlin-mix.vcxproj.user to make it work.
     -->
     <DebuggerWorkingDirectory>$(OutDir)</DebuggerWorkingDirectory>
+
+    <!-- [20230326.R2] Chj: Workaround for a special project trait on VC2019 VSLinux. 
+      If .sln is in parent path of .vcxproj, Remote_GCC_1_0 tries to launch wrong exe path on Linux. So we need this.
+    -->
+    <RemoteDebuggerCommand Condition="$(Configuration.EndsWith('-remote-gcc'))">$(RemoteDeployDir)/bin.linux/$(Platform)/$(Configuration)/$(TargetName)$(TargetExt)</RemoteDebuggerCommand>
   </PropertyGroup>
 
 
