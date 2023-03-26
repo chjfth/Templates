@@ -127,17 +127,10 @@
   <!-- Adaptive .obj/.exe/.pdb output folder structure -->
   
   <PropertyGroup>
-  
-    <objdirsuffix></objdirsuffix>
-  
-    <!-- VC2019: If .sln contains 2+ .vcxproj, different .vcxproj should have different objdirnam to avoid compiler warning MSB8028. -->
-    <objdirsuffix Condition="$(SolutionName)!=$(ProjectName)">.$(ProjectName)</objdirsuffix>
-    <IntDir>$(ProjectDir)obj-$(PlatformToolset)$(objdirsuffix)\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)bin-$(PlatformToolset)\$(Platform)\$(Configuration)\</OutDir>
-  
-    <RemoteIntRelDir>$(RemoteProjectRelDir)/obj$(objdirsuffix)/$(Platform)/$(Configuration)</RemoteIntRelDir>
+     <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <RemoteIntRelDir>$(RemoteProjectRelDir)/obj/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin/$(Platform)/$(Configuration)</RemoteOutRelDir>
-  
   </PropertyGroup>
 
   <!-- 
