@@ -205,7 +205,7 @@
     Source file list:
    -->
   <ItemGroup>
-    <ClCompile Include="simple-print.cpp" />
+    <ClCompile Include="linux-simple-print.cpp" />
   </ItemGroup>
   <ItemGroup>
     <!-- 
