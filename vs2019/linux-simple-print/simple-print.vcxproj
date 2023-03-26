@@ -67,8 +67,8 @@
   
   <PropertyGroup Label="Globals">
     <ProjectGuid>{20220606-0000-0000-0000-164154000000}</ProjectGuid>
-    <ProjectName>simple-print</ProjectName>
-    <TargetName>simple-print</TargetName>
+    <ProjectName>linux-simple-print</ProjectName>
+    <TargetName>linux-simple-print</TargetName>
     <Keyword>Linux</Keyword>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
@@ -131,6 +131,17 @@
     <OutDir>$(SolutionDir)bin.linux\$(Platform)\$(Configuration)\</OutDir>
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj.linux/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin.linux/$(Platform)/$(Configuration)</RemoteOutRelDir>
+
+    <!-- This is to workround a possible VS2019 16.11 VSLinux bug: 
+      When launching WSL_1_0 exe, VSIDE will go hard to launch exe inside:
+        /mnt/d/gitw/Templates/vs2019/linux-simple-print/bin/x64/Debug-WSL-gcc
+      instead of the correct:
+        /mnt/d/gitw/Templates/vs2019/linux-simple-print/bin.linux/x64/Debug-WSL-gcc
+      .
+      Without this workaround, user needs to set the `<DebuggerWorkingDirectory>$(OutDir)</DebuggerWorkingDirectory>` 
+      into linux-simple-print.vcxproj.user to make it work.
+    -->
+    <DebuggerWorkingDirectory>$(OutDir)</DebuggerWorkingDirectory>
   </PropertyGroup>
 
   <!-- 
