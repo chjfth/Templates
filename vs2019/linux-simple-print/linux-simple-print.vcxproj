@@ -163,6 +163,7 @@
   -->
   <ItemDefinitionGroup>
     <ClCompile>
+      <CppLanguageStandard>c++14</CppLanguageStandard>
       <PreprocessorDefinitions>;;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\src\linux;..\src;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
