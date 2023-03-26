@@ -73,17 +73,6 @@
   
   <!-- User project properties -->
   
-  <PropertyGroup Condition=" $(Configuration.Contains('vs2019'))" Label="Configuration">
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.EndsWith('-WSL-gcc'))" Label="Globals">
-    <PlatformToolset>WSL_1_0</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.EndsWith('-remote-gcc'))" Label="Globals">
-    <PlatformToolset>Remote_GCC_1_0</PlatformToolset>
-  </PropertyGroup>
-  
-  
   <PropertyGroup Label="Globals">
     <ProjectGuid>{20230326-0000-0000-0000-104022000000}</ProjectGuid>
     <ProjectName>simpleprint-winlin-mix</ProjectName>
@@ -97,6 +86,17 @@
     <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
     <LinuxProjectType>{D51BCBC9-82E9-4017-911E-C93873C4EA2B}</LinuxProjectType>
   </PropertyGroup>
+
+  <PropertyGroup Condition=" $(Configuration.Contains('vs2019'))" Label="Configuration">
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.EndsWith('-WSL-gcc'))" Label="Globals">
+    <PlatformToolset>WSL_1_0</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.EndsWith('-remote-gcc'))" Label="Globals">
+    <PlatformToolset>Remote_GCC_1_0</PlatformToolset>
+  </PropertyGroup>
+  
 
   <!-- Microsoft.Cpp.Default.props 
   	For Linux .vcxproj, this should be after above "global" Properties. -->
