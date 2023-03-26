@@ -74,7 +74,7 @@
   <!-- User project properties -->
   
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{20230326-0000-0000-0000-104022000000}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-0000-0000-202303260000}</ProjectGuid>
     <ProjectName>simpleprint-winlin-mix</ProjectName>
     <TargetName>simpleprint-winlin-mix</TargetName>
   </PropertyGroup>
