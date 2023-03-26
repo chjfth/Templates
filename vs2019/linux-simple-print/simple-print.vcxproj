@@ -57,10 +57,10 @@
   
   <!-- User project properties -->
   
-  <PropertyGroup Condition="!$(Configuration.EndsWith('-WSL-gcc'))" Label="Globals">
+  <PropertyGroup Condition="$(Configuration.EndsWith('-WSL-gcc'))" Label="Globals">
     <PlatformToolset>WSL_1_0</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition=" $(Configuration.EndsWith('-remote-gcc'))" Label="Globals">
+  <PropertyGroup Condition="$(Configuration.EndsWith('-remote-gcc'))" Label="Globals">
     <PlatformToolset>Remote_GCC_1_0</PlatformToolset>
   </PropertyGroup>
   
@@ -127,20 +127,17 @@
   <!-- Adaptive .obj/.exe/.pdb output folder structure -->
   
   <PropertyGroup>
-
+  
     <objdirsuffix></objdirsuffix>
-
+  
     <!-- VC2019: If .sln contains 2+ .vcxproj, different .vcxproj should have different objdirnam to avoid compiler warning MSB8028. -->
     <objdirsuffix Condition="$(SolutionName)!=$(ProjectName)">.$(ProjectName)</objdirsuffix>
     <IntDir>$(ProjectDir)obj-$(PlatformToolset)$(objdirsuffix)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin-$(PlatformToolset)\$(Platform)\$(Configuration)\</OutDir>
-
-     <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
-
+  
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj$(objdirsuffix)/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin/$(Platform)/$(Configuration)</RemoteOutRelDir>
-
+  
   </PropertyGroup>
 
   <!-- 
