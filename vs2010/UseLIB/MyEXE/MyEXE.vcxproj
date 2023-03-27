@@ -40,7 +40,7 @@
   <!-- User project properties -->
   
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{20220531-0000-0000-0001-111111000000}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-0000-0001-202205310000}</ProjectGuid>
     <ProjectName>MyEXE</ProjectName>
      <TargetName>MyEXE</TargetName>
     <ConfigurationType>Application</ConfigurationType>
