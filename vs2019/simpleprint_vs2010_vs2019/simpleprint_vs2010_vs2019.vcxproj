@@ -40,7 +40,7 @@
   <!-- User project properties -->
   
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{20220922-0000-0000-0000-111111000000}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-0000-0000-202209220000}</ProjectGuid>
     <ProjectName>simpleprint_vs2010_vs2019</ProjectName>
      <TargetName>simpleprint_vs2010_vs2019</TargetName>
     <ConfigurationType>Application</ConfigurationType>
