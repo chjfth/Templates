@@ -148,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyAPI\MyAPI.vcxproj">
-      <Project>{20220531-0000-0000-0002-111111000000}</Project>
+      <Project>{CCCCCCCC-0000-0000-0002-202205310000}</Project>
     </ProjectReference>
   </ItemGroup>
 
