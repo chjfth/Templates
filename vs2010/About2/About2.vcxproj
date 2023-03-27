@@ -40,7 +40,7 @@
   <!-- User project properties -->
   
   <PropertyGroup Label="Configuration">
-    <ProjectGuid>{20220419-0000-0000-0000-172903000001}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-0000-0002-202209140001}</ProjectGuid>
     <ProjectName>About2</ProjectName>
      <TargetName>About2</TargetName>
     <ConfigurationType>Application</ConfigurationType>
