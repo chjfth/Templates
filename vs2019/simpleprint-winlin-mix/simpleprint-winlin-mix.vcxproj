@@ -121,9 +121,11 @@
   <!-- Always use target-platform-prefixed gcc/g++ command lines, so that WSL can cope with multiple target platforms. -->
   
   <PropertyGroup Condition="'$(Platform)'=='x86'">
-    <!-- On Win10 WSL, we should have x86 compiler installed. Using Ubuntu Linux for example:
+    <!-- On Win10 WSL, we should have x86 and/or x64 compiler installed. 
+        Using Ubuntu Linux 22.04 for example:
     	
-    	sudo apt install g++-i686-linux-gnu
+    	sudo apt install g++-i686-linux-gnu  # install x86 32bit compiler
+    	sudo apt install g++                 # install x64 64bit compiler
      -->
     <RemoteCCompileToolExe>i686-linux-gnu-g++</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe>i686-linux-gnu-g++</RemoteCppCompileToolExe>
