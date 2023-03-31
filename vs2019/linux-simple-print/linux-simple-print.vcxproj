@@ -175,8 +175,8 @@
     <Link>
       <!-- 
       <AdditionalLibraryDirectories>;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>;%(AdditionalDependencies)</AdditionalDependencies>
        -->
+      <AdditionalDependencies>;;-lpthread;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <!-- Better build.log file naming -->
     <BuildLog>
