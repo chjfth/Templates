@@ -6,12 +6,24 @@ extern"C" {
 #endif
 
 
+// Note for compiling for Windows using Visual C++:
+// The project file should pass to cl.exe 
+//
+//		/D DLLEXPORT_MyAPI=__declspec(dllexport)
+//
+// so to have the interface functions "exported", even in the case
+// that MyAPI.def file is not passed to linker.
+
 #ifndef DLLEXPORT_MyAPI
 #define DLLEXPORT_MyAPI
 #endif
 
 #ifndef DLL_CALLCONV // DLL function calling convention
+#ifdef _WIN32 // target Win32/Win64 OS
 #define DLL_CALLCONV __stdcall
+#else
+#define DLL_CALLCONV
+#endif
 #endif
 	
 struct MyAPI_version_st 
