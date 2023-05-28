@@ -14,9 +14,9 @@
       <Configuration>Debug-remote-gcc</Configuration>
       <Platform>x86</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x86">
+    <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
-      <Platform>x86</Platform>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <!-- x64 -->
     <ProjectConfiguration Include="Debug-vs2019|x64">
