@@ -109,6 +109,13 @@
   <PropertyGroup Condition="$(Configuration.Contains('Release'))" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
+
+  <PropertyGroup Condition="!$(Configuration.EndsWith('-gcc'))">
+    <!-- 'Unicode' should be set *before* Microsoft.Cpp.props is included,
+        so that /D_UNICODE DUNICODE can be added to compiler flags. -->
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
