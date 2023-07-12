@@ -101,6 +101,7 @@
   <!-- 
   	Compiler/Linker Behavior Settings : shared 
   -->
+
   <ItemDefinitionGroup>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -130,9 +131,11 @@
       <Path>$(IntDir)__$(MSBuildProjectName).build.log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
+
   <!-- 
   	Compiler Behavior Settings : Debug 
   -->
+
   <ItemDefinitionGroup Condition="$(Configuration.StartsWith('Debug'))">
     <ClCompile>
       <Optimization>Disabled</Optimization>
@@ -140,11 +143,14 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
     </Link>
   </ItemDefinitionGroup>
+  
   <!-- 
   	Compiler Behavior Settings : Release 
   -->
+  
   <ItemDefinitionGroup Condition="$(Configuration.StartsWith('Release'))">
     <ClCompile>
       <FunctionLevelLinking>true</FunctionLevelLinking>
