@@ -2,8 +2,8 @@
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <!-- x86 -->
-    <ProjectConfiguration Include="Debug-vs2019|Win32">
-      <Configuration>Debug-vs2019</Configuration>
+    <ProjectConfiguration Include="Debug-msvc|Win32">
+      <Configuration>Debug-msvc</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug-WSL-gcc|x86">
@@ -19,8 +19,8 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <!-- x64 -->
-    <ProjectConfiguration Include="Debug-vs2019|x64">
-      <Configuration>Debug-vs2019</Configuration>
+    <ProjectConfiguration Include="Debug-msvc|x64">
+      <Configuration>Debug-msvc</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug-WSL-gcc|x64">
@@ -36,8 +36,8 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <!-- ARM -->
-    <ProjectConfiguration Include="Debug-vs2019|ARM">
-      <Configuration>Debug-vs2019</Configuration>
+    <ProjectConfiguration Include="Debug-msvc|ARM">
+      <Configuration>Debug-msvc</Configuration>
       <Platform>ARM</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug-WSL-gcc|ARM">
@@ -53,8 +53,8 @@
       <Platform>ARM</Platform>
     </ProjectConfiguration>
     <!-- ARM64 -->
-    <ProjectConfiguration Include="Debug-vs2019|ARM64">
-      <Configuration>Debug-vs2019</Configuration>
+    <ProjectConfiguration Include="Debug-msvc|ARM64">
+      <Configuration>Debug-msvc</Configuration>
       <Platform>ARM64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug-WSL-gcc|ARM64">
@@ -107,7 +107,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
 
-  <!-- Some MSVC specific -->
+  <!-- Visual C++ native BuildConf specific -->
   <PropertyGroup Condition="!$(Configuration.EndsWith('-gcc'))">
     
     <!-- 'Unicode' should be set *before* Microsoft.Cpp.props is included,
@@ -184,11 +184,11 @@
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj.linux/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin.linux/$(Platform)/$(Configuration)</RemoteOutRelDir>
 
-    <!-- [20230326.R1] This is to workround a possible VS2019 16.11 VSLinux bug: 
+    <!-- [20230326.R1] This is to workround a possible msvc 16.11 VSLinux bug: 
       When launching WSL_1_0 exe, VSIDE will go hard to launch exe inside:
-        /mnt/d/gitw/Templates/vs2019/simpleprint-winlin-mix/bin/x64/Debug-WSL-gcc
+        /mnt/d/gitw/Templates/msvc/simpleprint-winlin-mix/bin/x64/Debug-WSL-gcc
       instead of the correct:
-        /mnt/d/gitw/Templates/vs2019/simpleprint-winlin-mix/bin.linux/x64/Debug-WSL-gcc
+        /mnt/d/gitw/Templates/msvc/simpleprint-winlin-mix/bin.linux/x64/Debug-WSL-gcc
       .
       Without this workaround, user needs to set the `<DebuggerWorkingDirectory>$(OutDir)</DebuggerWorkingDirectory>` 
       into simpleprint-winlin-mix.vcxproj.user to make it work.
@@ -226,7 +226,7 @@
 
       <AdditionalIncludeDirectories>.;;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Condition=" $(Configuration.Contains('vs2019'))" Label="Configuration">
+    <ClCompile Condition=" $(Configuration.Contains('msvc'))" Label="Configuration">
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>    
     <Link>
