@@ -111,7 +111,7 @@
   <PropertyGroup Condition="!$(Configuration.EndsWith('-gcc'))">
     
     <!-- 'Unicode' should be set *before* Microsoft.Cpp.props is included,
-        so that /D_UNICODE DUNICODE can be added to compiler flags. -->
+        so that /D_UNICODE /DUNICODE can be added to compiler flags. -->
     <CharacterSet>Unicode</CharacterSet>
 
     <!-- Referring to $(DefaultPlatformToolset), so that this .vcxproj 
