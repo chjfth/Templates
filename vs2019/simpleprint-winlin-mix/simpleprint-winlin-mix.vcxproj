@@ -87,9 +87,6 @@
     <LinuxProjectType>{D51BCBC9-82E9-4017-911E-C93873C4EA2B}</LinuxProjectType>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" $(Configuration.Contains('vs2019'))" Label="Configuration">
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.EndsWith('-WSL-gcc'))" Label="Globals">
     <PlatformToolset>WSL_1_0</PlatformToolset>
   </PropertyGroup>
@@ -110,12 +107,28 @@
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
 
+  <!-- Some MSVC specific -->
   <PropertyGroup Condition="!$(Configuration.EndsWith('-gcc'))">
+    
     <!-- 'Unicode' should be set *before* Microsoft.Cpp.props is included,
         so that /D_UNICODE DUNICODE can be added to compiler flags. -->
     <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
 
+    <!-- Referring to $(DefaultPlatformToolset), so that this .vcxproj 
+      adapts automatically to lastest SDK on current Visual Studio version. 
+     
+      $(DefaultPlatformToolset) has such values:
+        empty  on VC2010
+        "v120" on VC2013
+        "v140" on VC2015
+        "v141" on VC2017
+          "v142" on VC2019
+          "v143" on VC2022
+      -->
+    <PlatformToolset Condition="$(DefaultPlatformToolset)!=''">$(DefaultPlatformToolset)</PlatformToolset>
+    
+  </PropertyGroup>
+  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
