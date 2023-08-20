@@ -47,7 +47,7 @@
   </PropertyGroup>
   
   <!-- Microsoft.Cpp.Default.props 
-  	For Linux .vcxproj, this should be after above "global" Properties. -->
+  	This should be after above "Global" Properties. (At least Linux .vcxproj demands this.) -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 
   <!-- Debug or Release -->
