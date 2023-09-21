@@ -171,11 +171,11 @@
     Source file list:
    -->
   <ItemGroup>
-    <ClCompile Include="cuda_print.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
 
   <ItemGroup>
-    <CudaCompile Include="cuda_gpu.cu" />
+    <CudaCompile Include="cuda_print.cu" />
   </ItemGroup>
 
   <!-- MSBuild system stock Cpp.targets -->
