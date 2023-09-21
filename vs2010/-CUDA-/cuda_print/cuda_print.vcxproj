@@ -92,6 +92,15 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  
+  <!-- 
+    Import user-realm cuda_toolkit.props, so that, if user has multiple CUDA vcxproj-s,
+    user can reuse this cuda_toolkit.props to set CUDA headers-and-libs path.
+  -->
+  <ImportGroup Label="PropertySheets">
+    <Import Project=".\cuda_toolkit.props" />
+  </ImportGroup>
+  
   <PropertyGroup Label="UserMacros" />
 
   <!-- Better .obj/.exe/.pdb output folder structure -->
