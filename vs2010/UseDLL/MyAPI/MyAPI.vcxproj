@@ -183,6 +183,9 @@
     <ClInclude Include="iversion.h" />
     <ClInclude Include="MyAPI.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="MyAPI.def" />
+  </ItemGroup>
 
   <!-- MSBuild system stock Cpp.targets -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
