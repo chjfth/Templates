@@ -39,11 +39,11 @@
 
   <!-- User project properties -->
   
-  <PropertyGroup Label="Configuration">
-    <ProjectGuid>{CCCCCCCC-0000-0000-0002-111111000000}</ProjectGuid>
-    <ProjectName>MyAPI</ProjectName>
-     <TargetName>MyAPI</TargetName>
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CCCCCCCC-0000-0000-0000-202308290001}</ProjectGuid>
+    <ProjectName>cuda_print</ProjectName>
+     <TargetName>cuda_print</TargetName>
+    <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   
   <!-- Microsoft.Cpp.Default.props 
@@ -51,13 +51,11 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 
   <!-- Debug or Release -->
-  <PropertyGroup Condition=" $(Configuration.StartsWith('Debug'))" Label="Configuration">
+  <PropertyGroup Condition="$(Configuration.StartsWith('Debug'))" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
-  <PropertyGroup Condition="!$(Configuration.StartsWith('Debug'))" Label="Configuration">
+  <PropertyGroup Condition="$(Configuration.StartsWith('Release'))" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
-    <!-- note: WholeProgramOptimization=true causes `dumpbin /linkermember:1 xxx.lib` to output nothing. -->
-    <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
 
   <!-- Unicode or ANSI(MBCS) -->
@@ -67,7 +65,7 @@
   <PropertyGroup Condition=" $(Configuration.Contains('ANSI'))" Label="Configuration">
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-
+  
   <PropertyGroup>
     <!-- Referring to $(DefaultPlatformToolset), so that this .vcxproj 
       adapts automatically to lastest SDK on current Visual Studio version. 
@@ -86,11 +84,23 @@
   <!---->
 
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 8.0.props" />
   </ImportGroup>
+
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  
+  <!-- 
+    Import user-realm cuda_toolkit.props, so that, if user has multiple CUDA vcxproj-s,
+    user can reuse this cuda_toolkit.props to set CUDA headers-and-libs path.
+  -->
+  <ImportGroup Label="PropertySheets">
+    <Import Project=".\cuda_toolkit.props" />
+  </ImportGroup>
+  
   <PropertyGroup Label="UserMacros" />
 
   <!-- Better .obj/.exe/.pdb output folder structure -->
@@ -99,15 +109,14 @@
      <IntDir>$(ProjectDir)obj-$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin-$(PlatformToolset)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
-  
+
   <!-- 
   	Compiler/Linker Behavior Settings : shared 
   -->
-  
   <ItemDefinitionGroup>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDataBase</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 
       <!-- Note: $(TargetPath) cannot receive a value in <PropertyGroup>, so it has to be in ItemDefinitionGroup. -->
 
@@ -116,33 +125,33 @@
       <!-- EXE/DLL's .pdb is truly intermediate, so we put it in $(IntDir), with some fancy file-naming -->
       <ProgramDataBaseFileName Condition="'$(TargetExt)'!='.lib' ">$(IntDir)$(TargetName).$(PlatformToolset).pdb</ProgramDataBaseFileName>
 
-      <PreprocessorDefinitions>WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions>;;DLLEXPORT_MyAPI=__declspec(dllexport);%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>;;WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+
+      <AdditionalIncludeDirectories>.;;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <CudaCompile Condition="'$(Platform)'=='x64'">
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+    </CudaCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDataBaseFile>$(TargetPath).pdb</ProgramDataBaseFile>
       <ImportLibrary>$(OutDir)$(TargetName)--imp.lib</ImportLibrary>
       <GenerateMapFile>true</GenerateMapFile>
-      <ModuleDefinitionFile>MyAPI.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories>;;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='Win32'">;;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='x64'"  >;;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ComCtl32.Lib;;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cudart_static.lib;SetupAPI.lib;;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <!-- Better build.log file naming -->
     <BuildLog>
       <Path>$(IntDir)__$(MSBuildProjectName).build.log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
-
   <!-- 
   	Compiler Behavior Settings : Debug 
   -->
-
-  <ItemDefinitionGroup Condition=" $(Configuration.StartsWith('Debug'))">
+  <ItemDefinitionGroup Condition="$(Configuration.StartsWith('Debug'))">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;DBG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -152,17 +161,15 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
     </Link>
   </ItemDefinitionGroup>
-
   <!-- 
   	Compiler Behavior Settings : Release 
   -->
-
-  <ItemDefinitionGroup Condition="!$(Configuration.StartsWith('Debug'))">
+  <ItemDefinitionGroup Condition="$(Configuration.StartsWith('Release'))">
     <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PreprocessorDefinitions>NDEBUG;DBG=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>NDEBUG;DBG=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <OptimizeReferences>true</OptimizeReferences>
@@ -172,24 +179,19 @@
   <!-- 
     Source file list:
    -->
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
 
   <ItemGroup>
-    <ClCompile Include="MyAPI.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="MyAPI.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="iversion.h" />
-    <ClInclude Include="MyAPI.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="MyAPI.def" />
+    <CudaCompile Include="cuda_print.cu" />
   </ItemGroup>
 
   <!-- MSBuild system stock Cpp.targets -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 8.0.targets" />
   </ImportGroup>
 
   <!-- import VSPG start -->
