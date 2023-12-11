@@ -105,22 +105,22 @@
     	sudo apt install g++-i686-linux-gnu  # install x86 32bit compiler
     	sudo apt install g++                 # install x64 64bit compiler
      -->
-    <RemoteCCompileToolExe>i686-linux-gnu-g++</RemoteCCompileToolExe>
+    <RemoteCCompileToolExe>i686-linux-gnu-gcc</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe>i686-linux-gnu-g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>i686-linux-gnu-g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='x64'">
-    <RemoteCCompileToolExe>x86_64-linux-gnu-g++</RemoteCCompileToolExe>
+    <RemoteCCompileToolExe>x86_64-linux-gnu-gcc</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe>x86_64-linux-gnu-g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>x86_64-linux-gnu-g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='ARM'">
-    <RemoteCCompileToolExe>arm-linux-gnueabi-g++</RemoteCCompileToolExe>
+    <RemoteCCompileToolExe>arm-linux-gnueabi-gcc</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe>arm-linux-gnueabi-g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>arm-linux-gnueabi-g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='ARM64'">
-    <RemoteCCompileToolExe>aarch64-linux-gnu-g++</RemoteCCompileToolExe>
+    <RemoteCCompileToolExe>aarch64-linux-gnu-gcc</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe>aarch64-linux-gnu-g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>aarch64-linux-gnu-g++</RemoteLdToolExe>
   </PropertyGroup>
