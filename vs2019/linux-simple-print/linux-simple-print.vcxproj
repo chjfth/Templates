@@ -80,6 +80,21 @@
   	For Linux .vcxproj, this should be after above "global" Properties. -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   
+  <PropertyGroup Label="Configuration">
+
+    <!-- If we need to create a static lib xxx.a , not xxx.out executable, enable this:  
+         (This must be set *after* Microsoft.Cpp.Default.props) -->
+    <!-- <ConfigurationType>StaticLibrary</ConfigurationType>  --> 
+    
+    <!-- If you want to customize 'cast-folder' for this project,  change RemoteRootDir and RemoteProjectRelDir,
+         Source code files in your .vcxproj will be cast-copy to Linux machine's 
+         $(RemoteRootDir)/$(RemoteProjectRelDir) folder. 
+         By default(when not explicitly set), the cast-copy destination will be ~/projects/$(ProjectName) . -->
+    <RemoteRootDir>~/projects/$(SolutionName)</RemoteRootDir>
+    <RemoteProjectRelDir>$(ProjectName)</RemoteProjectRelDir>
+    
+  </PropertyGroup>
+  
   <!-- Debug or Release -->
   <PropertyGroup Condition="$(Configuration.StartsWith('Debug'))" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
