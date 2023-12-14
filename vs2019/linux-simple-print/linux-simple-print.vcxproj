@@ -89,7 +89,8 @@
     <!-- If you want to customize 'cast-folder' for this project,  change RemoteRootDir and RemoteProjectRelDir,
          Source code files in your .vcxproj will be cast-copy to Linux machine's 
          $(RemoteRootDir)/$(RemoteProjectRelDir) folder. 
-         By default(when not explicitly set), the cast-copy destination will be ~/projects/$(ProjectName) . -->
+         By default(when not explicitly set), the cast-copy destination will be ~/projects/$(ProjectName) . 
+    -->
     <RemoteRootDir>~/projects/$(SolutionName)</RemoteRootDir>
     <RemoteProjectRelDir>$(ProjectName)</RemoteProjectRelDir>
     
@@ -102,7 +103,9 @@
   <PropertyGroup Condition="$(Configuration.StartsWith('Release'))" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
+  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
