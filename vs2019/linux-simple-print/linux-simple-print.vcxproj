@@ -190,13 +190,16 @@
     <ClCompile>
       <CppLanguageStandard>c++14</CppLanguageStandard>
       <PreprocessorDefinitions>;;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\src\linux;..\src;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./extra-includes;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <!-- 
-      <AdditionalLibraryDirectories>;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-       -->
-      <AdditionalDependencies>;;-lpthread;%(AdditionalDependencies)</AdditionalDependencies>
+
+      <AdditionalLibraryDirectories>;;./myextralib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      
+      <!-- To link a library(ncurses, pthread), pick either form below: -->
+      <AdditionalDependencies>;;-lncurses;%(AdditionalDependencies)</AdditionalDependencies>
+      <LibraryDependencies>;;pthread;%(LibraryDependencies)</LibraryDependencies>
+      
     </Link>
     <!-- Better build.log file naming -->
     <BuildLog>
