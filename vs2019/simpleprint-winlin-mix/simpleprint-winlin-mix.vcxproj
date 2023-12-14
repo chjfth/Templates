@@ -224,7 +224,7 @@
   <!--################################################################################-->
 
   <!-- 
-  	Compiler/Linker Behavior Settings : shared 
+  	Compiler/Linker Behavior Settings : [Windows] shared 
   -->
   <ItemDefinitionGroup Condition="!$(Configuration.EndsWith('-gcc'))">
     <ClCompile>
@@ -240,7 +240,7 @@
 
       <PreprocessorDefinitions>;;WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 
-      <AdditionalIncludeDirectories>.;;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./extra-includes;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Condition=" $(Configuration.Contains('msvc'))" Label="Configuration">
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -251,7 +251,7 @@
       <ProgramDataBaseFile>$(TargetPath).pdb</ProgramDataBaseFile>
       <ImportLibrary>$(OutDir)$(TargetName)--imp.lib</ImportLibrary>
       <GenerateMapFile>true</GenerateMapFile>
-      <AdditionalLibraryDirectories>;;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>;;./myextralib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='Win32'">;;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='x64'"  >;;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SetupAPI.lib;;%(AdditionalDependencies)</AdditionalDependencies>
@@ -262,7 +262,7 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <!-- 
-  	Compiler Behavior Settings : Debug 
+  	Compiler Behavior Settings : [Windows] Debug 
   -->
   <ItemDefinitionGroup Condition="!$(Configuration.EndsWith('-gcc')) and $(Configuration.Contains('Debug'))">
     <ClCompile>
@@ -275,7 +275,7 @@
     </Link>
   </ItemDefinitionGroup>
   <!-- 
-  	Compiler Behavior Settings : Release 
+  	Compiler Behavior Settings : [Windows] Release 
   -->
   <ItemDefinitionGroup Condition="!$(Configuration.EndsWith('-gcc')) and $(Configuration.Contains('Release'))">
     <ClCompile>
@@ -308,7 +308,7 @@
   -->
 
   <!-- 
-  	Compiler/Linker Behavior Settings : shared 
+  	Compiler/Linker Behavior Settings : [Linux] shared 
   -->
   <ItemDefinitionGroup Condition=" $(Configuration.EndsWith('-gcc'))">
     <ClCompile>
@@ -317,10 +317,11 @@
       <AdditionalIncludeDirectories>.;;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <!-- 
-      <AdditionalLibraryDirectories>;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-       -->
-      <AdditionalDependencies>;;-lpthread;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>;;./myextralib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      
+      <!-- VSLinux: To link a library(ncurses, pthread), pick either form below: -->
+      <AdditionalDependencies>;;-lncurses;%(AdditionalDependencies)</AdditionalDependencies>
+      <LibraryDependencies>;;pthread;%(LibraryDependencies)</LibraryDependencies>
     </Link>
     <!-- Better build.log file naming -->
     <BuildLog>
@@ -329,7 +330,7 @@
   </ItemDefinitionGroup>
   
   <!-- 
-  	Compiler Behavior Settings : Debug 
+  	Compiler Behavior Settings : [Linux] Debug 
   -->
   <ItemDefinitionGroup Condition=" $(Configuration.EndsWith('-gcc')) and $(Configuration.Contains('Debug'))">
     <ClCompile>
@@ -341,7 +342,7 @@
   </ItemDefinitionGroup>
   
   <!-- 
-  	Compiler Behavior Settings : Release 
+  	Compiler Behavior Settings : [Linux] Release 
   -->
   <ItemDefinitionGroup Condition=" $(Configuration.EndsWith('-gcc')) and $(Configuration.Contains('Release'))">
     <ClCompile>
