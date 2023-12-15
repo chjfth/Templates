@@ -319,8 +319,8 @@
     <Link>
       <AdditionalLibraryDirectories>;;./myextralib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       
-      <!-- VSLinux: To link a library(ncurses, pthread), pick either form below: -->
-      <AdditionalDependencies>;;-lncurses;%(AdditionalDependencies)</AdditionalDependencies>
+      <!-- VSLinux: To link a library(resolv, pthread), pick either form below: -->
+      <AdditionalDependencies>;;-lresolv;%(AdditionalDependencies)</AdditionalDependencies>
       <LibraryDependencies>;;pthread;%(LibraryDependencies)</LibraryDependencies>
     </Link>
     <!-- Better build.log file naming -->
