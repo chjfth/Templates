@@ -195,7 +195,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" $(Configuration.EndsWith('-gcc'))">
-     <IntDir>$(ProjectDir)obj.linux\$(Platform)\$(Configuration)\</IntDir>
+    <objdirsuffix Condition="$(SolutionName)!=$(ProjectName)">.$(ProjectName)</objdirsuffix>
+     <IntDir>$(ProjectDir)obj.linux$(objdirsuffix)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin.linux\$(Platform)\$(Configuration)\</OutDir>
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj.linux/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin.linux/$(Platform)/$(Configuration)</RemoteOutRelDir>
