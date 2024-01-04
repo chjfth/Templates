@@ -154,33 +154,48 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   
-  <!-- Always use target-platform-prefixed gcc/g++ command lines, so that WSL can cope with multiple target platforms. -->
-  
+  <!-- 
+	Take Ubuntu Linux 22.04 for example, in order to have x86 and x64 compiler installed,
+    extra packages should be installed:
+	
+	  sudo apt install g++-i686-linux-gnu  # install x86 32bit compiler
+	  sudo apt install g++                 # install x64 64bit compiler
+    
+    By default, we use target-platform-prefixed gcc/g++ command lines, 
+    so that WSL can cope with multiple target platforms. 
+    But if you have only executable gcc (instead of x86_64-linux-gnu-gcc) in your Linux box,
+    you can override the default behavior by defining env-vars:
+    
+      VSLINUX_GCC_PREFIX_X86=none
+      VSLINUX_GCC_PREFIX_X64=none
+      VSLINUX_GCC_PREFIX_ARM=none
+      VSLINUX_GCC_PREFIX_ARM64=none
+  -->
   <PropertyGroup Condition="'$(Platform)'=='x86'">
-    <!-- On Win10 WSL, we should have x86 and/or x64 compiler installed. 
-        Using Ubuntu Linux 22.04 for example:
-    	
-    	sudo apt install g++-i686-linux-gnu  # install x86 32bit compiler
-    	sudo apt install g++                 # install x64 64bit compiler
-     -->
-    <RemoteCCompileToolExe>i686-linux-gnu-gcc</RemoteCCompileToolExe>
-    <RemoteCppCompileToolExe>i686-linux-gnu-g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>i686-linux-gnu-g++</RemoteLdToolExe>
+    <VSLINUX_GCC_PREFIX>$(VSLINUX_GCC_PREFIX_X86)</VSLINUX_GCC_PREFIX>
+    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_X86)'==''">i686-linux-gnu-</VSLINUX_GCC_PREFIX>
+    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_X86)'=='none'"></VSLINUX_GCC_PREFIX>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='x64'">
-    <RemoteCCompileToolExe>x86_64-linux-gnu-gcc</RemoteCCompileToolExe>
-    <RemoteCppCompileToolExe>x86_64-linux-gnu-g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>x86_64-linux-gnu-g++</RemoteLdToolExe>
+    <VSLINUX_GCC_PREFIX>$(VSLINUX_GCC_PREFIX_X64)</VSLINUX_GCC_PREFIX>
+    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_X64)'==''">x86_64-linux-gnu-</VSLINUX_GCC_PREFIX>
+    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_X64)'=='none'"></VSLINUX_GCC_PREFIX>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='ARM'">
-    <RemoteCCompileToolExe>arm-linux-gnueabi-gcc</RemoteCCompileToolExe>
-    <RemoteCppCompileToolExe>arm-linux-gnueabi-g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>arm-linux-gnueabi-g++</RemoteLdToolExe>
+    <VSLINUX_GCC_PREFIX>$(VSLINUX_GCC_PREFIX_ARM)</VSLINUX_GCC_PREFIX>
+    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_ARM)'==''">arm-linux-gnueabi-</VSLINUX_GCC_PREFIX>
+    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_ARM)'=='none'"></VSLINUX_GCC_PREFIX>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='ARM64'">
-    <RemoteCCompileToolExe>aarch64-linux-gnu-gcc</RemoteCCompileToolExe>
-    <RemoteCppCompileToolExe>aarch64-linux-gnu-g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>aarch64-linux-gnu-g++</RemoteLdToolExe>
+    <VSLINUX_GCC_PREFIX>$(VSLINUX_GCC_PREFIX_ARM64)</VSLINUX_GCC_PREFIX>
+    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_ARM64)'==''">aarch64-linux-gnu-</VSLINUX_GCC_PREFIX>
+    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_ARM64)'=='none'"></VSLINUX_GCC_PREFIX>
+  </PropertyGroup>
+  <!-- . -->
+  <PropertyGroup>
+    <RemoteCCompileToolExe>$(VSLINUX_GCC_PREFIX)gcc</RemoteCCompileToolExe>
+    <RemoteCppCompileToolExe>$(VSLINUX_GCC_PREFIX)g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>$(VSLINUX_GCC_PREFIX)g++</RemoteLdToolExe>
   </PropertyGroup>
   <!-- Pending Q: when to use arm-linux-gnueabihf-g++ ? -->
   
