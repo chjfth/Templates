@@ -362,7 +362,7 @@
   -->
   <ItemDefinitionGroup Condition=" $(Configuration.EndsWith('-gcc')) and $(Configuration.Contains('Release'))">
     <ClCompile>
-      <PreprocessorDefinitions>_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
     </Link>
