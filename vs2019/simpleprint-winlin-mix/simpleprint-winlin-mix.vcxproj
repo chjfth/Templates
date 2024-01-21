@@ -220,7 +220,7 @@
      <IntDir>$(ProjectDir)obj.linux$(objdirsuffix)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin.linux\$(Platform)\$(Configuration)\</OutDir>
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj.linux/$(Platform)/$(Configuration)</RemoteIntRelDir>
-    <RemoteOutRelDir>$(RemoteProjectRelDir)/bin.linux/$(Platform)/$(Configuration)</RemoteOutRelDir>
+    <RemoteOutRelDir>bin.linux/$(Platform)/$(Configuration)</RemoteOutRelDir>
 
     <cs_RemoteOutAbsDir>   $(RemoteRootDir)/$(RemoteOutRelDir)</cs_RemoteOutAbsDir>
     <HE_RemoteOutAbsDir>$(HE_RemoteRootDir)/$(RemoteOutRelDir)</HE_RemoteOutAbsDir>
