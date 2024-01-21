@@ -74,7 +74,7 @@
   
   
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{20240121-0000-0000-0000-223029000001}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-0000-0001-202401210000}</ProjectGuid>
     <ProjectName>MyEXE</ProjectName>
     <TargetName>MyEXE</TargetName>
     <Keyword>Linux</Keyword>
@@ -280,7 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyAPI\MyAPI.vcxproj">
-      <Project>{20240121-0000-0000-0000-222257000001}</Project>
+      <Project>{CCCCCCCC-0000-0000-0002-202401210000}</Project>
     </ProjectReference>
   </ItemGroup>
 
