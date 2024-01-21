@@ -10,6 +10,10 @@
       <Configuration>Debug-remote-gcc</Configuration>
       <Platform>x86</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-remote-gcc|x86">
+      <Configuration>Release-remote-gcc</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x86">
       <Configuration>Release</Configuration>
       <Platform>x86</Platform>
@@ -21,6 +25,10 @@
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug-remote-gcc|x64">
       <Configuration>Debug-remote-gcc</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-remote-gcc|x64">
+      <Configuration>Release-remote-gcc</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
@@ -93,6 +101,9 @@
     -->
     <RemoteRootDir>~/projects/$(SolutionName)</RemoteRootDir>
     <RemoteProjectRelDir>$(ProjectName)</RemoteProjectRelDir>
+    
+    <!-- HE: $HOME Expansion-->
+    <HE_RemoteRootDir>$(RemoteRootDir.Replace('~', '$HOME'))</HE_RemoteRootDir>
     
   </PropertyGroup>
   
@@ -167,6 +178,8 @@
     <OutDir>$(SolutionDir)bin.linux\$(Platform)\$(Configuration)\</OutDir>
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj.linux/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin.linux/$(Platform)/$(Configuration)</RemoteOutRelDir>
+    <cs_RemoteOutAbsDir>   $(RemoteRootDir)/$(RemoteOutRelDir)</cs_RemoteOutAbsDir>
+    <HE_RemoteOutAbsDir>$(HE_RemoteRootDir)/$(RemoteOutRelDir)</HE_RemoteOutAbsDir>
 
     <!-- [20230326.R1] This is to workround a possible VS2019 16.11 VSLinux bug: 
       When launching WSL_1_0 exe, VSIDE will go hard to launch exe inside:
@@ -193,7 +206,7 @@
   	copy extra executables.
 
      <PropertyGroup>
-  		<PreLaunchCommand>chmod +x $(RemoteOutDir)/$(TargetFilename)</PreLaunchCommand>
+  		<PreLaunchCommand>chmod +x $(HE_RemoteOutAbsDir)/$(TargetFilename)</PreLaunchCommand>
      </PropertyGroup>
   	
   -->
@@ -216,6 +229,7 @@
       <AdditionalDependencies>;;-lresolv;%(AdditionalDependencies)</AdditionalDependencies>
       <LibraryDependencies>;;pthread;%(LibraryDependencies)</LibraryDependencies>
       
+      <GenerateMapFile>$(HE_RemoteOutAbsDir)/$(TargetFilename).map</GenerateMapFile>
     </Link>
     <!-- Better build.log file naming -->
     <BuildLog>
