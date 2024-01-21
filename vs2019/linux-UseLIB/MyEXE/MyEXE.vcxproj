@@ -101,6 +101,7 @@
     -->
     <RemoteRootDir>~/projects/$(SolutionName)</RemoteRootDir>
     <RemoteProjectRelDir>$(ProjectName)</RemoteProjectRelDir>
+    <RemoteDeployDir>$(RemoteRootDir)</RemoteDeployDir>
     
     <!-- HE: $HOME Expansion-->
     <HE_RemoteRootDir>$(RemoteRootDir.Replace('~', '$HOME'))</HE_RemoteRootDir>
