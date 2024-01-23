@@ -217,6 +217,10 @@
   	
   -->
 
+  <PropertyGroup>
+    <vslinux_RemoteOutAbsDir Condition=" $(Configuration.EndsWith('-remote-gcc'))">$(HE_RemoteOutAbsDir)</vslinux_RemoteOutAbsDir>
+    <vslinux_RemoteOutAbsDir Condition="!$(Configuration.EndsWith('-remote-gcc'))">$(wsl_OutDir)</vslinux_RemoteOutAbsDir>
+  </PropertyGroup>
 
   <!-- 
   	Compiler/Linker Behavior Settings : shared 
@@ -229,15 +233,14 @@
     </ClCompile>
     <Link>
 
-      <!-- We know that libMyAPI.so has been generated in $(HE_RemoteOutAbsDir), so add it to lib search path. -->
-      <AdditionalLibraryDirectories>;;./myextralib;$(HE_RemoteOutAbsDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <!-- We know that libMyAPI.so has been generated in $(vslinux_RemoteOutAbsDir), so add it to lib search path. -->
+      <AdditionalLibraryDirectories>;;./myextralib;$(vslinux_RemoteOutAbsDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       
       <!-- To link a library(resolv, pthread), pick either form below: -->
       <AdditionalDependencies>;;-lMyAPI;%(AdditionalDependencies)</AdditionalDependencies>
       <LibraryDependencies>;;pthread;%(LibraryDependencies)</LibraryDependencies>
       
-      <GenerateMapFile Condition=" $(Configuration.EndsWith('-remote-gcc'))">$(HE_RemoteOutAbsDir)/$(TargetFilename).map</GenerateMapFile>
-      <GenerateMapFile Condition="!$(Configuration.EndsWith('-remote-gcc'))">        $(wsl_OutDir)/$(TargetFilename).map</GenerateMapFile>
+      <GenerateMapFile>$(vslinux_RemoteOutAbsDir)/$(TargetFilename).map</GenerateMapFile>
     </Link>
     <!-- Better build.log file naming -->
     <BuildLog>
