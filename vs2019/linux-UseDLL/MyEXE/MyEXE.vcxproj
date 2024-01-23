@@ -74,7 +74,7 @@
   
   
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{20240123-0000-0000-0000-233541000001}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-0000-0005-202401230000}</ProjectGuid>
     <ProjectName>MyEXE</ProjectName>
     <TargetName>MyEXE</TargetName>
     <Keyword>Linux</Keyword>

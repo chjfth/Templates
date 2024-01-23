@@ -74,7 +74,7 @@
   
   
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{20240123-0000-0000-0000-232404000001}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-0000-0004-202401230000}</ProjectGuid>
     <ProjectName>MyAPI</ProjectName>
     <TargetName>libMyAPI</TargetName>
     <Keyword>Linux</Keyword>
