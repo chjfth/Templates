@@ -230,13 +230,18 @@
   	Compiler/Linker Behavior Settings : shared 
   -->
   <ItemDefinitionGroup>
+    
     <ClCompile>
       <CppLanguageStandard>c++14</CppLanguageStandard>
       <PreprocessorDefinitions>;;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>./extra-includes;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      
+      <!-- 
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+       -->
     </ClCompile>
+    
     <Link>
-
       <AdditionalLibraryDirectories>;;./myextralib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       
       <!-- To link a library(resolv, pthread), pick either form below: -->
@@ -245,11 +250,17 @@
       
       <GenerateMapFile Condition=" $(Configuration.EndsWith('-remote-gcc'))">$(HE_RemoteOutAbsDir)/$(TargetFilename).map</GenerateMapFile>
       <GenerateMapFile Condition="!$(Configuration.EndsWith('-remote-gcc'))">        $(wsl_OutDir)/$(TargetFilename).map</GenerateMapFile>
+
+      <!-- 
+      <AdditionalOptions>-static %(AdditionalOptions)</AdditionalOptions>
+       -->
     </Link>
+
     <!-- Better build.log file naming -->
     <BuildLog>
       <Path>$(IntDir)__$(MSBuildProjectName).build.log</Path>
     </BuildLog>
+    
   </ItemDefinitionGroup>
   
   <!-- 
