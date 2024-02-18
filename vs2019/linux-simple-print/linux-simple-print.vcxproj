@@ -166,7 +166,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='ARM'">
     <VSLINUX_GCC_PREFIX>$(VSLINUX_GCC_PREFIX_ARM)</VSLINUX_GCC_PREFIX>
-    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_ARM)'==''">arm-linux-gnueabi-</VSLINUX_GCC_PREFIX>
+    <!-- Memo: Use arm-linux-gnueabi- for soft-float . -->
+    <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_ARM)'==''">arm-linux-gnueabihf-</VSLINUX_GCC_PREFIX>
     <VSLINUX_GCC_PREFIX Condition="'$(VSLINUX_GCC_PREFIX_ARM)'=='none'"></VSLINUX_GCC_PREFIX>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='ARM64'">
@@ -180,7 +181,6 @@
     <RemoteCppCompileToolExe>$(VSLINUX_GCC_PREFIX)g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>$(VSLINUX_GCC_PREFIX)g++</RemoteLdToolExe>
   </PropertyGroup>
-  <!-- Pending Q: when to use arm-linux-gnueabihf-g++ ? -->
   
   <!-- Adaptive .obj/.exe/.pdb output folder structure -->
   
