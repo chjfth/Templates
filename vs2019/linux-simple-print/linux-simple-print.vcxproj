@@ -191,7 +191,7 @@
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj.linux/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>bin.linux/$(Platform)/$(Configuration)</RemoteOutRelDir>
     
-    <cs_RemoteOutAbsDir>   $(RemoteRootDir)/$(RemoteOutRelDir)</cs_RemoteOutAbsDir>
+       <cs_RemoteOutAbsDir>$(RemoteRootDir)/$(RemoteOutRelDir)</cs_RemoteOutAbsDir>
     <HE_RemoteOutAbsDir>$(HE_RemoteRootDir)/$(RemoteOutRelDir)</HE_RemoteOutAbsDir>
     <wsl_OutDir>$(wsl_SlnDir)/bin.linux/$(Platform)/$(Configuration)</wsl_OutDir>
 
@@ -207,9 +207,12 @@
     <DebuggerWorkingDirectory>$(OutDir)</DebuggerWorkingDirectory>
 
     <!-- [20230326.R2] Chj: Workaround for a special project trait on VC2019 VSLinux. 
-      If .sln is in parent path of .vcxproj, Remote_GCC_1_0 tries to launch wrong exe path on Linux. So we need this.
+      If .sln is in parent path of .vcxproj, Remote_GCC_1_0 tries to launch wrong exe path on Linux. 
+      So we need to define <RemoteDebuggerCommand> explicitly.
     -->
-    <RemoteDebuggerCommand Condition="$(Configuration.EndsWith('-remote-gcc'))">$(RemoteDeployDir)/bin.linux/$(Platform)/$(Configuration)/$(TargetName)$(TargetExt)</RemoteDebuggerCommand>
+    <cs_RemoteTargetPathExe Condition="$(Configuration.EndsWith('-remote-gcc'))">$(cs_RemoteOutAbsDir)/$(TargetName)$(TargetExt)</cs_RemoteTargetPathExe>
+    <cs_RemoteTargetPathExe Condition="$(Configuration.EndsWith('-WSL-gcc'))"           >$(wsl_OutDir)/$(TargetName)$(TargetExt)</cs_RemoteTargetPathExe>
+    <RemoteDebuggerCommand>$(cs_RemoteTargetPathExe)</RemoteDebuggerCommand>
   </PropertyGroup>
 
   <!-- 
@@ -227,7 +230,7 @@
 
 
   <!-- 
-  	Compiler/Linker Behavior Settings : shared 
+  	Compiler/Linker Behavior Settings : Debug/Release shared 
   -->
   <ItemDefinitionGroup>
     
@@ -248,13 +251,20 @@
       <AdditionalDependencies>;;-lresolv;%(AdditionalDependencies)</AdditionalDependencies>
       <LibraryDependencies>;;pthread;%(LibraryDependencies)</LibraryDependencies>
       
-      <GenerateMapFile Condition=" $(Configuration.EndsWith('-remote-gcc'))">$(HE_RemoteOutAbsDir)/$(TargetFilename).map</GenerateMapFile>
-      <GenerateMapFile Condition="!$(Configuration.EndsWith('-remote-gcc'))">        $(wsl_OutDir)/$(TargetFilename).map</GenerateMapFile>
+      <GenerateMapFile Condition="$(Configuration.EndsWith('-remote-gcc'))">$(HE_RemoteOutAbsDir)/$(TargetFilename).map</GenerateMapFile>
+      <GenerateMapFile Condition="$(Configuration.EndsWith('-WSL-gcc'))"           >$(wsl_OutDir)/$(TargetFilename).map</GenerateMapFile>
 
       <!-- 
       <AdditionalOptions>-static %(AdditionalOptions)</AdditionalOptions>
        -->
     </Link>
+
+    <RemotePostBuildEvent Condition="$(Configuration.EndsWith('-gcc'))">
+      <!-- If you want to do sth to the output exe from Linux machine's perspective, enable the <Command> below.
+      <Message>========= RemotePostBuildEvent on target executable =========</Message>
+      <Command>chmod u+s $(cs_RemoteTargetPathExe)</Command>
+       -->
+    </RemotePostBuildEvent>
 
     <!-- Better build.log file naming -->
     <BuildLog>
