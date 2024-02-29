@@ -232,7 +232,7 @@
     <ClCompile>
       <CppLanguageStandard>c++14</CppLanguageStandard>
       <PreprocessorDefinitions>;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./extra-includes;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./extra-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
 

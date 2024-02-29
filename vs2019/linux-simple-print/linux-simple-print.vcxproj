@@ -237,7 +237,7 @@
     <ClCompile>
       <CppLanguageStandard>c++14</CppLanguageStandard>
       <PreprocessorDefinitions>;;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./extra-includes;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./extra-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       
       <!-- 
       <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
