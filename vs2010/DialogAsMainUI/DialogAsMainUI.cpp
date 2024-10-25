@@ -79,15 +79,15 @@ BOOL Dlg_OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam)
 
 	SetFocus(GetDlgItem(hdlg, IDC_BUTTON1));
 	
-	return 0; // Let Dlg-manager respect SetFocus().
+	return FALSE; // FALSE to let Dlg-manager respect our SetFocus().
 }
 
 INT_PTR WINAPI Dlg_Proc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 {
 	switch (uMsg) 
 	{
-		HANDLE_MSG(hdlg, WM_INITDIALOG,    Dlg_OnInitDialog);
-		HANDLE_MSG(hdlg, WM_COMMAND,       Dlg_OnCommand);
+		HANDLE_dlgMSG(hdlg, WM_INITDIALOG,    Dlg_OnInitDialog);
+		HANDLE_dlgMSG(hdlg, WM_COMMAND,       Dlg_OnCommand);
 	}
 	return FALSE;
 }
