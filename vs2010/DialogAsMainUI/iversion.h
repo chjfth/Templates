@@ -1,7 +1,6 @@
 #ifndef __DialogAsMainUI_iversion_h_
 #define __DialogAsMainUI_iversion_h_
 
-
 #define DialogAsMainUI_VMAJOR 1
 #define DialogAsMainUI_VMINOR 0
 #define DialogAsMainUI_VPATCH 0

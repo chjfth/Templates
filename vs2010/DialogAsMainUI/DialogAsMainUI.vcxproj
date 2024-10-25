@@ -176,10 +176,10 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DialogAsMainUI1.rc" />
-    <ResourceCompile Include="iversion.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DialogAsMainUI1.ico" />
+    <None Include="_iversion.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="JULayout2.h" />

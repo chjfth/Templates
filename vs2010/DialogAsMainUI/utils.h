@@ -1,5 +1,7 @@
 #pragma once
 
+#include "targetver.h"
+
 #include <tchar.h>
 
 #define HANDLE_dlgMSG(hwnd, message, fn) \
