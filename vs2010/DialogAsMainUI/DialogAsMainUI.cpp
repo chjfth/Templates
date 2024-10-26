@@ -1,6 +1,7 @@
 ﻿#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <windowsx.h>
+#include <CommCtrl.h>
 #include <tchar.h>
 #include <stdio.h>
 #include "resource.h"
@@ -97,6 +98,8 @@ INT_PTR WINAPI Dlg_Proc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 int WINAPI _tWinMain(HINSTANCE hinstExe, HINSTANCE, PTSTR szParams, int) 
 {
 	g_hinstExe = hinstExe;
+
+	InitCommonControls(); // WinXP requires this, to work with Visual-style manifest
 
 	const TCHAR *szfullcmdline = GetCommandLine();
 	vaDbgTs(_T("GetCommandLine() = %s"), szfullcmdline);
