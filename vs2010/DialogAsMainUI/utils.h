@@ -13,6 +13,10 @@
 
 TCHAR* now_timestr(TCHAR buf[], int bufchars, bool ymd=false);
 
+int vaMsgBox(HWND hwnd, UINT utype, const TCHAR *szTitle, const TCHAR *szfmt, ...);
+
+void vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...);
+
 void vaDbgTs(const TCHAR *fmt, ...);
 
 void vaDbgS(const TCHAR *fmt, ...);

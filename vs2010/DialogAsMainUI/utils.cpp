@@ -19,10 +19,38 @@ TCHAR* now_timestr(TCHAR buf[], int bufchars, bool ymd)
 	return buf;
 }
 
+int vaMsgBox(HWND hwnd, UINT utype, const TCHAR *szTitle, const TCHAR *szfmt, ...)
+{
+	va_list args;
+	va_start(args, szfmt);
+
+	TCHAR msgtext[4000] = {};
+	_vsntprintf_s(msgtext, _TRUNCATE, szfmt, args);
+
+	int ret = MessageBox(hwnd, msgtext, szTitle, utype);
+
+	va_end(args);
+	return ret;
+}
+
+void vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...)
+{
+	TCHAR tbuf[4000] = {};
+	va_list args;
+	va_start(args, szfmt);
+
+	_vsntprintf_s(tbuf, _TRUNCATE, szfmt, args);
+
+	SetDlgItemText(hwnd, nIDDlgItem, tbuf);
+
+	va_end(args);
+}
+
+
 void vaDbgTs(const TCHAR *fmt, ...)
 {
 	// Note: Each calling outputs one line, with timestamp prefix.
-	// A '\n' will be added automatially at end.
+	// A '\n' will be added automatically at end.
 
 	static int count = 0;
 	static DWORD s_prev_msec = GetTickCount();
