@@ -59,6 +59,17 @@ inline void chSETDLGICONS(HWND hwnd, int idi) {
 		MAKEINTRESOURCE(idi)));
 }
 
+static void Dlg_EnableJULayout(HWND hdlg)
+{
+	JULayout *jul = JULayout::EnableJULayout(hdlg);
+
+	jul->AnchorControl(0,0, 100,0, IDC_LABEL1);
+	jul->AnchorControl(0,0, 100,100, IDC_EDIT1);
+	jul->AnchorControl(50,100, 50,100, IDC_BUTTON1);
+
+	// If you add more controls(IDC_xxx) to the dialog, adjust them here.
+}
+
 BOOL Dlg_OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam) 
 {
 	DlgPrivate_st *prdata = (DlgPrivate_st*)lParam;
@@ -73,14 +84,9 @@ BOOL Dlg_OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam)
 	
 	SetDlgItemText(hdlg, IDC_EDIT1, prdata->mystr);
 
-	JULayout *jul = JULayout::EnableJULayout(hdlg);
-
-	jul->AnchorControl(0,0, 100,0, IDC_LABEL1);
-	jul->AnchorControl(0,0, 100,100, IDC_EDIT1);
-	jul->AnchorControl(50,100, 50,100, IDC_BUTTON1);
+	Dlg_EnableJULayout(hdlg);
 
 	SetFocus(GetDlgItem(hdlg, IDC_BUTTON1));
-	
 	return FALSE; // FALSE to let Dlg-manager respect our SetFocus().
 }
 
