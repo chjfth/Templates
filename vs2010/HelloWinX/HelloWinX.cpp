@@ -4,7 +4,8 @@ HelloWinX.cpp skeleton program
 				 
    Compile it with command line in Visual C++ 2010+:
    
-rc /Od /MT /Zi /D_DEBUG /D_UNICODE /DUNICODE HelloWinX.rc
+cl /c /Od /MT /Zi /D_DEBUG /D_UNICODE /DUNICODE HelloWinX.cpp
+rc HelloWinX.rc
 link /debug HelloWinX.obj HelloWinX.res kernel32.lib user32.lib gdi32.lib
 
    Then we can load it into Visual C++ debugger.
@@ -26,7 +27,7 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 					PTSTR szCmdLine, int iCmdShow)
 {
 	(void)hPrevInstance; (void)szCmdLine; 
-	static TCHAR szAppName[] = TEXT ("HelloWin") ;
+	static TCHAR szAppName[] = TEXT ("HelloWinX") ;
 	HWND         hwnd ;
 	MSG          msg ;
 	WNDCLASS     wndclass ;
@@ -45,7 +46,7 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	RegisterClass (&wndclass);
 	 
 	hwnd = CreateWindow (szAppName,    // window class name
-		TEXT ("The HelloWin Program"), // window caption
+		TEXT ("The HelloWinX Program"), // window caption
 		WS_OVERLAPPEDWINDOW,           // window style
 		20,              // initial x position
 		20,              // initial y position
@@ -102,7 +103,7 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{{
 		HANDLE_MSG(hwnd, WM_CREATE, Cls_OnCreate);
 		HANDLE_MSG(hwnd, WM_PAINT, Cls_OnPaint);
-		HANDLE_MSG(hwnd, WM_DESTROY, Cls_OnDestroy);		
+		HANDLE_MSG(hwnd, WM_DESTROY, Cls_OnDestroy);
 	}}
 	
 	return DefWindowProc (hwnd, message, wParam, lParam) ;
