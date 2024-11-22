@@ -33,7 +33,21 @@ int vaMsgBox(HWND hwnd, UINT utype, const TCHAR *szTitle, const TCHAR *szfmt, ..
 	return ret;
 }
 
-void vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...)
+int vaSetWindowText(HWND hwnd, const TCHAR *szfmt, ...)
+{
+	va_list args;
+	va_start(args, szfmt);
+
+	TCHAR msgtext[400] = {};
+	_vsntprintf_s(msgtext, _TRUNCATE, szfmt, args);
+
+	int ret = SetWindowText(hwnd, msgtext);
+
+	va_end(args);
+	return ret;
+}
+
+int vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...)
 {
 	TCHAR tbuf[4000] = {};
 	va_list args;
@@ -41,9 +55,10 @@ void vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...)
 
 	_vsntprintf_s(tbuf, _TRUNCATE, szfmt, args);
 
-	SetDlgItemText(hwnd, nIDDlgItem, tbuf);
+	int ret = SetDlgItemText(hwnd, nIDDlgItem, tbuf);
 
 	va_end(args);
+	return ret;
 }
 
 

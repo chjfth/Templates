@@ -43,7 +43,7 @@ void vaDbg(const TCHAR *fmt, ...)
 LRESULT CALLBACK WndProc (HWND, UINT, WPARAM, LPARAM) ;
 
 int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
-					PTSTR szCmdLine, int iCmdShow)
+					PTSTR szCmdLine, int nCmdShow)
 {
 	(void)hPrevInstance; (void)szCmdLine; 
 	static TCHAR szAppName[] = TEXT ("HelloWin") ;
@@ -78,7 +78,7 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	 
 	SendMessage(hwnd, WM_SETICON, TRUE, (LPARAM)LoadIcon(hInstance,	TEXT("MYPROGRAM")));
 
-	ShowWindow (hwnd, iCmdShow) ;
+	ShowWindow (hwnd, nCmdShow) ;
 	UpdateWindow (hwnd) ;
 	
 	while (GetMessage (&msg, NULL, 0, 0))
@@ -87,7 +87,7 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		DispatchMessage (&msg) ;
 	}
 
-	return 0;
+	return (int)msg.wParam; // the value N told by PostQuitMessage(N);
 }
 
 LRESULT CALLBACK WndProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

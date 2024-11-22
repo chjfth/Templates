@@ -24,7 +24,7 @@ link /debug HelloWinX.obj HelloWinX.res kernel32.lib user32.lib gdi32.lib
 LRESULT CALLBACK WndProc (HWND, UINT, WPARAM, LPARAM) ;
 
 int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
-					PTSTR szCmdLine, int iCmdShow)
+					PTSTR szCmdLine, int nCmdShow)
 {
 	(void)hPrevInstance; (void)szCmdLine; 
 	static TCHAR szAppName[] = TEXT ("HelloWinX") ;
@@ -59,7 +59,7 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	 
 	SendMessage(hwnd, WM_SETICON, TRUE, (LPARAM)LoadIcon(hInstance,	MAKEINTRESOURCE(1)));
 
-	ShowWindow (hwnd, iCmdShow) ;
+	ShowWindow (hwnd, nCmdShow) ;
 	UpdateWindow (hwnd) ;
 	
 	while (GetMessage (&msg, NULL, 0, 0))
@@ -68,7 +68,7 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		DispatchMessage (&msg) ;
 	}
 
-	return msg.wParam; // the value N told by PostQuitMessage(N);
+	return (int)msg.wParam; // the value N told by PostQuitMessage(N);
 }
 
 BOOL Cls_OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
