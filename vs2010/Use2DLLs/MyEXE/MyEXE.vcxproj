@@ -74,7 +74,7 @@
   <!-- User project properties -->
   
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CCCCCCCC-0000-2023-0822-135422000002}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-2023-0822-145256000003}</ProjectGuid>
     <ProjectName>MyEXE</ProjectName>
      <TargetName>$(ProjectName)</TargetName>
     <ConfigurationType>Application</ConfigurationType>
@@ -85,10 +85,10 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 
   <!-- Debug or Release -->
-  <PropertyGroup Condition="$(Configuration.StartsWith('Debug'))" Label="Configuration">
+  <PropertyGroup Condition=" $(Configuration.StartsWith('Debug'))" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.StartsWith('Release'))" Label="Configuration">
+  <PropertyGroup Condition="!$(Configuration.StartsWith('Debug'))" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
 
@@ -139,7 +139,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDataBase</DebugInformationFormat>
 
       <!-- Note: $(TargetPath) cannot receive a value in <PropertyGroup>, so it has to be in ItemDefinitionGroup. -->
 
@@ -208,10 +208,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyAPI1\MyAPI1.vcxproj">
-      <Project>{CCCCCCCC-0000-2023-0822-135422000001}</Project>
+      <Project>{CCCCCCCC-0000-2023-0822-145256000001}</Project>
     </ProjectReference>
     <ProjectReference Include="..\MyAPI2\MyAPI2.vcxproj">
-      <Project>{CCCCCCCC-0000-2023-0822-145256000001}</Project>
+      <Project>{CCCCCCCC-0000-2023-0822-145256000002}</Project>
     </ProjectReference>
   </ItemGroup>
   <!-- MSBuild system stock Cpp.targets -->

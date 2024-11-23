@@ -74,7 +74,7 @@
   <!-- User project properties -->
   
   <PropertyGroup Label="Configuration">
-    <ProjectGuid>{CCCCCCCC-0000-2023-0822-145256000001}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-2023-0822-145256000002}</ProjectGuid>
     <ProjectName>MyAPI2</ProjectName>
      <TargetName>$(ProjectName)</TargetName>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
