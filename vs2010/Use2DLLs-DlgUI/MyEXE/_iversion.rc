@@ -1,0 +1,28 @@
+#include "iversion.h"
+
+1 VERSIONINFO
+FileVersion    MyEXE_VMAJOR, MyEXE_VMINOR, MyEXE_VPATCH, MyEXE_VTAIL
+ProductVersion MyEXE_VMAJOR, MyEXE_VMINOR, MyEXE_VPATCH, MyEXE_VTAIL
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "040904E4"
+        //language ID = U.S. English, char set = Windows, Multilingual
+        {
+            VALUE "CompanyName", "Public Domain"
+            VALUE "ProductName",     MyEXE_NAME
+            VALUE "FileDescription", MyEXE_NAME
+            VALUE "FileVersion",    MyEXE_VMAJORs "." MyEXE_VMINORs "." MyEXE_VPATCHs
+            VALUE "ProductVersion",    MyEXE_VMAJORs "." MyEXE_VMINORs "." MyEXE_VPATCHs
+            VALUE "LegalCopyright",    "Public domain"
+            VALUE "OriginalFilename" , MyEXE_NAME ".exe"
+            VALUE "InternalName", MyEXE_NAME ".exe"
+            VALUE "Comments","Presented by public domain"
+        }
+    }
+
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x0409, 1252
+    }
+}
