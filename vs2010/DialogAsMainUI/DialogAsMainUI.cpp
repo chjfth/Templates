@@ -35,7 +35,7 @@ void Dlg_OnCommand(HWND hdlg, int id, HWND hwndCtl, UINT codeNotify)
 	{
 		++(prdata->clicks);
 		_sntprintf_s(textbuf, _TRUNCATE, _T("Clicks: %d"), prdata->clicks);
-		SetDlgItemText(hdlg, IDC_EDIT1, textbuf);
+		SetDlgItemText(hdlg, IDC_EDIT_LOGMSG, textbuf);
 
 		InvalidateRect(GetDlgItem(hdlg, IDC_LABEL1), NULL, TRUE);
 		break;
@@ -64,7 +64,7 @@ static void Dlg_EnableJULayout(HWND hdlg)
 	JULayout *jul = JULayout::EnableJULayout(hdlg);
 
 	jul->AnchorControl(0,0, 100,0, IDC_LABEL1);
-	jul->AnchorControl(0,0, 100,100, IDC_EDIT1);
+	jul->AnchorControl(0,0, 100,100, IDC_EDIT_LOGMSG);
 	jul->AnchorControl(50,100, 50,100, IDC_BUTTON1);
 
 	// If you add more controls(IDC_xxx) to the dialog, adjust them here.
@@ -72,17 +72,17 @@ static void Dlg_EnableJULayout(HWND hdlg)
 
 BOOL Dlg_OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam) 
 {
+	chSETDLGICONS(hdlg, IDI_WINMAIN);
+
 	DlgPrivate_st *prdata = (DlgPrivate_st*)lParam;
 	SetWindowLongPtr(hdlg, DWLP_USER, (LONG_PTR)prdata);
 	
-	chSETDLGICONS(hdlg, IDI_WINMAIN);
-
 	TCHAR textbuf[200];
 	_sntprintf_s(textbuf, _TRUNCATE, _T("version: %d.%d.%d"), 
 		DialogAsMainUI_VMAJOR, DialogAsMainUI_VMINOR, DialogAsMainUI_VPATCH);
 	SetDlgItemText(hdlg, IDC_LABEL1, textbuf);
 	
-	SetDlgItemText(hdlg, IDC_EDIT1, prdata->mystr);
+	SetDlgItemText(hdlg, IDC_EDIT_LOGMSG, prdata->mystr);
 
 	Dlg_EnableJULayout(hdlg);
 
