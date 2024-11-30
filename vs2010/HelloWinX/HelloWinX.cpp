@@ -28,9 +28,9 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	(void)hPrevInstance; (void)szCmdLine; 
 	static TCHAR szAppName[] = TEXT ("HelloWinX") ;
-	HWND         hwnd ;
-	MSG          msg ;
-	WNDCLASS     wndclass ;
+	HWND         hwnd = NULL;
+	MSG          msg = {};
+	WNDCLASS     wndclass = {};
 
 	wndclass.style         = CS_HREDRAW | CS_VREDRAW ;
 	wndclass.lpfnWndProc   = WndProc ;
