@@ -61,6 +61,9 @@ int vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...)
 	return ret;
 }
 
+//////////////////////////////////////////////////////////////////////////
+
+static int s_dbgcount = 0;
 
 void vaDbgTs(const TCHAR *fmt, ...)
 {
@@ -84,7 +87,8 @@ void vaDbgTs(const TCHAR *fmt, ...)
 	TCHAR timebuf[40] = {};
 	now_timestr(timebuf, ARRAYSIZE(timebuf));
 
-	_sntprintf_s(buf, _TRUNCATE, _T("%s (+%3u.%03us) "), 
+	_sntprintf_s(buf, _TRUNCATE, _T("[%d]%s (+%3u.%03us) "), 
+		++s_dbgcount,
 		timebuf, 
 		delta_msec/1000, delta_msec%1000);
 
@@ -114,10 +118,9 @@ void vaDbgS(const TCHAR *fmt, ...)
 {
 	// This only has Sequential prefix.
 
-	static int count = 0;
 	TCHAR buf[1000] = {0};
 
-	_sntprintf_s(buf, ARRAYSIZE(buf)-3, _TRUNCATE, TEXT("[%d] "), ++count); // prefix seq
+	_sntprintf_s(buf, ARRAYSIZE(buf)-3, _TRUNCATE, TEXT("[%d] "), ++s_dbgcount); // prefix seq
 
 	int prefixlen = (int)_tcslen(buf);
 
