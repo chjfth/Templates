@@ -56,7 +56,7 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	wndclass.cbClsExtra    = 0 ;
 	wndclass.cbWndExtra    = 0 ;
 	wndclass.hInstance     = hInstance ;
-	wndclass.hIcon         = LoadIcon (NULL, IDI_APPLICATION) ;
+	wndclass.hIcon         = LoadIcon (hInstance, TEXT("MYPROGRAM")) ;
 	wndclass.hCursor       = LoadCursor (NULL, IDC_ARROW) ;
 	wndclass.hbrBackground = (HBRUSH) GetStockObject (WHITE_BRUSH) ;
 	wndclass.lpszMenuName  = NULL ;
@@ -76,8 +76,6 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		hInstance,       // program instance handle
 		NULL) ;          // creation parameters
 	 
-	SendMessage(hwnd, WM_SETICON, TRUE, (LPARAM)LoadIcon(hInstance,	TEXT("MYPROGRAM")));
-
 	ShowWindow (hwnd, nCmdShow) ;
 	UpdateWindow (hwnd) ;
 	
