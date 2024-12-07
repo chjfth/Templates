@@ -38,7 +38,7 @@ BOOL vaSetWindowText(HWND hwnd, const TCHAR *szfmt, ...)
 	va_list args;
 	va_start(args, szfmt);
 
-	TCHAR msgtext[400] = {};
+	TCHAR msgtext[4000] = {};
 	_vsntprintf_s(msgtext, _TRUNCATE, szfmt, args);
 
 	BOOL succ = SetWindowText(hwnd, msgtext);

@@ -53,16 +53,6 @@ void Dlg_OnCommand(HWND hdlg, int id, HWND hwndCtl, UINT codeNotify)
 	}}
 }
 
-// Sets the dialog box icons
-inline void chSETDLGICONS(HWND hwnd, int idi) {
-	SendMessage(hwnd, WM_SETICON, TRUE,  (LPARAM)
-		LoadIcon((HINSTANCE) GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
-		MAKEINTRESOURCE(idi)));
-	SendMessage(hwnd, WM_SETICON, FALSE, (LPARAM)
-		LoadIcon((HINSTANCE) GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
-		MAKEINTRESOURCE(idi)));
-}
-
 static void Dlg_EnableJULayout(HWND hdlg)
 {
 	JULayout *jul = JULayout::EnableJULayout(hdlg);
@@ -93,11 +83,11 @@ void Do_InitWork(HWND hdlg)
 
 BOOL Dlg_OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam) 
 {
+	SNDMSG(hdlg, WM_SETICON, TRUE, (LPARAM)LoadIcon(GetWindowInstance(hdlg), MAKEINTRESOURCE(IDI_WINMAIN)));
+
 	DlgPrivate_st *prdata = (DlgPrivate_st*)lParam;
 	SetWindowLongPtr(hdlg, DWLP_USER, (LONG_PTR)prdata);
 	
-	chSETDLGICONS(hdlg, IDI_WINMAIN);
-
 	TCHAR textbuf[200];
 	_sntprintf_s(textbuf, _TRUNCATE, _T("version: %d.%d.%d"), 
 		MyEXE_VMAJOR, MyEXE_VMINOR, MyEXE_VPATCH);

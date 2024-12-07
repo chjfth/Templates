@@ -1,5 +1,6 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <windowsx.h>
 #include <stdio.h>
 
 #include "utils.h"
@@ -33,21 +34,21 @@ int vaMsgBox(HWND hwnd, UINT utype, const TCHAR *szTitle, const TCHAR *szfmt, ..
 	return ret;
 }
 
-int vaSetWindowText(HWND hwnd, const TCHAR *szfmt, ...)
+BOOL vaSetWindowText(HWND hwnd, const TCHAR *szfmt, ...)
 {
 	va_list args;
 	va_start(args, szfmt);
 
-	TCHAR msgtext[400] = {};
+	TCHAR msgtext[4000] = {};
 	_vsntprintf_s(msgtext, _TRUNCATE, szfmt, args);
 
-	int ret = SetWindowText(hwnd, msgtext);
+	BOOL succ = SetWindowText(hwnd, msgtext);
 
 	va_end(args);
-	return ret;
+	return succ;
 }
 
-int vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...)
+BOOL vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...)
 {
 	TCHAR tbuf[4000] = {};
 	va_list args;
@@ -55,10 +56,30 @@ int vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...)
 
 	_vsntprintf_s(tbuf, _TRUNCATE, szfmt, args);
 
-	int ret = SetDlgItemText(hwnd, nIDDlgItem, tbuf);
+	BOOL succ = SetDlgItemText(hwnd, nIDDlgItem, tbuf);
 
 	va_end(args);
-	return ret;
+	return succ;
+}
+
+void vaAppendText_mled(HWND hedit, const TCHAR *szfmt, ...)
+{
+	TCHAR tbuf[4000] = {};
+	va_list args;
+	va_start(args, szfmt);
+
+	_vsntprintf_s(tbuf, _TRUNCATE, szfmt, args);
+
+	int pos = GetWindowTextLength (hedit);
+	// -- [2024-10-26] Note: when pos reaches 30000, Edit_SetSel() will fail with
+	// WinErr=5 (ERROR_ACCESS_DENIED).
+	// User needs to raise the limit by calling:
+	//   Edit_LimitText(hedit, 200*1024); // EM_LIMITTEXT
+
+	Edit_SetSel(hedit, pos, pos);
+	Edit_ReplaceSel(hedit, tbuf);
+
+	va_end(args);
 }
 
 //////////////////////////////////////////////////////////////////////////
