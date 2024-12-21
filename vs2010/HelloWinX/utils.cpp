@@ -4,7 +4,7 @@
 
 #include "utils.h"
 
-TCHAR* now_timestr(TCHAR buf[], int bufchars, bool ymd)
+TCHAR* now_timestr(TCHAR buf[], int bufchars, bool ymd, bool add_millisec)
 {
 	SYSTEMTIME st = {0};
 	GetLocalTime(&st);
@@ -14,8 +14,16 @@ TCHAR* now_timestr(TCHAR buf[], int bufchars, bool ymd)
 		_sntprintf_s(buf, bufchars-1, _TRUNCATE, _T("%s%04d-%02d-%02d "), buf, 
 			st.wYear, st.wMonth, st.wDay);
 	}
-	_sntprintf_s(buf, bufchars-1, _TRUNCATE, _T("%s%02d:%02d:%02d.%03d]"), buf,
-		st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+	if(add_millisec)
+	{
+		_sntprintf_s(buf, bufchars-1, _TRUNCATE, _T("%s%02d:%02d:%02d.%03d]"), buf,
+			st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+	}
+	else
+	{
+		_sntprintf_s(buf, bufchars-1, _TRUNCATE, _T("%s%02d:%02d:%02d]"), buf,
+			st.wHour, st.wMinute, st.wSecond);
+	}
 	return buf;
 }
 
