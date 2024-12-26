@@ -103,7 +103,7 @@ BOOL Dlg_OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam)
 	return FALSE; // FALSE to let Dlg-manager respect our SetFocus().
 }
 
-INT_PTR WINAPI Dlg_Proc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam) 
+INT_PTR WINAPI UserDlgProc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 {
 	switch (uMsg) 
 	{
@@ -124,7 +124,7 @@ int WINAPI _tWinMain(HINSTANCE hinstExe, HINSTANCE, PTSTR szParams, int)
 	vaDbgTs(_T("GetCommandLine() = %s"), szfullcmdline);
 
 	DlgPrivate_st dlgdata = { _T("Hello.\r\nPrivate string here.") };
-	DialogBoxParam(hinstExe, MAKEINTRESOURCE(IDD_WINMAIN), NULL, Dlg_Proc, (LPARAM)&dlgdata);
+	DialogBoxParam(hinstExe, MAKEINTRESOURCE(IDD_WINMAIN), NULL, UserDlgProc, (LPARAM)&dlgdata);
 
 	return 0;
 }
