@@ -1,22 +1,36 @@
+#ifndef __JULayout2_h_20250228_
+#define __JULayout2_h_20250228_
+
 /******************************************************************************
-Module:  UILayout.h
+Original: UILayout.h
 Notices: Copyright (c) 2000 Jeffrey Richter
 Purpose: This class manages child window positioning and sizing when a parent 
          window is resized.
-         See Appendix B.
+         See Appendix B of his book PSSA2000.
 
-[2022-11-07] Updated by Chj, renamed to JULayout2.h .
+Updates by Jimm Chen:
+[2017-06-18] Now we can anchor a control with any proportion(pct 0~100).
+[2022-xx-xx] For AnchorControl() function, remove the puzzling fRedraw parameter.
+[2022-11-07] Add JULayout::PropSheetProc() to support dialog-box inside property-sheet.
 [2024-12-07] Cope with Groupbox background painting issue. Works OK now.
+	Note: To have groupbox painted correctly, you must add groupbox to AnchorControl(),
+	      even if the groupbox does not need to change size.
+[2025-02-28] An important fix: If groupbox1 has a nested groupbox2, now groupbox2's
+    background is painted correctly.
 
-Chj Note: To use this lib, pick one and only one of your xxx.cpp, write at its start:
+[Usage] To use this lib, pick one and only one of your xxx.cpp, write at its start:
 	
 	#define JULAYOUT_IMPL
 	#include "JULayout2.h"
 
-******************************************************************************/
+// In WM_INITDIALOG:
+	
+	JULayout *jul = JULayout::EnableJULayout(hdlg);
 
-#ifndef __JULayout2_h_
-#define __JULayout2_h_
+	jul->AnchorControl(0,0, 100,100, IDC_EDIT_WHOLE_AREA);
+	jul->AnchorControl(...);
+
+******************************************************************************/
 
 #include <assert.h>
 
@@ -47,17 +61,20 @@ public:
 
 public:
 	static bool PropSheetProc(HWND hwndPrsht, UINT uMsg, LPARAM lParam);
-	// -- In order to make PropertySheet() dialog resizable, user should hook into
+	// -- In order to make PropertySheet() dialog resizable, user(you) should call into
 	// JULayout::PropSheetProc() in PropertySheet()'s PFNPROPSHEETCALLBACK, like this:
 	//
-	// 	static int CALLBACK MyPrshtProc(HWND hwndPrsht, UINT uMsg, LPARAM lParam)
+	// 	static int CALLBACK YourPrshtProc(HWND hwndPrsht, UINT uMsg, LPARAM lParam)
 	// 	{
 	// 		bool succ = JULayout::PropSheetProc(hwndPrsht, uMsg, lParam);
 	//		if(!succ) ... do some logging ...;
+	//
+	//      ... other hook actions you apply ...
+	//
 	// 		return 0;
 	// 	}
 	// 
-	// 	INT_PTR MyPreparePropertysheet(...)
+	// 	INT_PTR YourPreparePropertysheet(...)
 	// 	{
 	// 		PROPSHEETHEADER psh = {sizeof(PROPSHEETHEADER)};
 	// 
@@ -65,7 +82,7 @@ public:
 	// 		psh.hInstance   = ...;
 	// 		psh.hwndParent  = hWnd;
 	// 	...
-	// 		psh.pfnCallback = MyPrshtProc;
+	// 		psh.pfnCallback = YourPrshtProc;
 	// 
 	// 		return PropertySheet(&psh);
 	// 	}
@@ -513,18 +530,18 @@ JULayout::PrshtWndProc(HWND hwndPrsht, UINT msg, WPARAM wParam, LPARAM lParam)
 ///////////////////////////////////////////////////////////////////////////////
 
 
-bool JULayout::AnchorControl(int x1Anco, int y1Anco, int x2Anco, int y2Anco, int nID) 
+bool JULayout::AnchorControl(int x1Anco, int y1Anco, int x2Anco, int y2Anco, int nCtrlID) 
 {
 	if(m_nNumControls>=JULAYOUT_MAX_CONTROLS)
 		return false;
 
-	HWND hwndControl = GetDlgItem(m_hwndParent, nID);
+	HWND hwndControl = GetDlgItem(m_hwndParent, nCtrlID);
 	if(hwndControl == NULL) 
 		return false;
 	
 	CtrlInfo_st &cinfo = m_CtrlInfo[m_nNumControls];
 
-	cinfo.m_nID = nID;
+	cinfo.m_nID = nCtrlID;
 
 	cinfo.pt1x.Anco = x1Anco; cinfo.pt1y.Anco = y1Anco;
 	cinfo.pt2x.Anco = x2Anco; cinfo.pt2y.Anco = y2Anco; 
@@ -561,18 +578,18 @@ bool JULayout::AnchorControl(int x1Anco, int y1Anco, int x2Anco, int y2Anco, int
 
 bool JULayout::AnchorControls(int x1Anco, int y1Anco, int x2Anco, int y2Anco, ...) 
 {
-	bool fOk = true;
+	bool AllOk = true;
 
 	va_list arglist;
 	va_start(arglist, y2Anco);
 	int nID = va_arg(arglist, int);
-	while (fOk && (nID != -1)) 
+	while (nID != -1)
 	{
-		fOk = fOk && AnchorControl(x1Anco, y1Anco, x2Anco, y2Anco, nID);
+		AllOk = AnchorControl(x1Anco, y1Anco, x2Anco, y2Anco, nID) && AllOk;
 		nID = va_arg(arglist, int);
 	}           
 	va_end(arglist);
-	return(fOk);
+	return(AllOk);
 }
 
 bool JULayout::AdjustControls(int cx, int cy) 
@@ -640,6 +657,13 @@ void JULayout::SubClassTheGroupbox(HWND hwndGroupbox)
 	WNDPROC prevWndproc = SubclassWindow(hwndGroupbox, GroupboxWndProc);
 	assert(prevWndproc);
 
+	if(prevWndproc==GroupboxWndProc)
+	{
+		// BAD: should not anchor twice on the same Uic
+		assert(prevWndproc != GroupboxWndProc);
+		return;
+	}
+
 	BOOL succ = SetProp(hwndGroupbox, JULAYOUT_GROUPBOX_STR, (HANDLE)prevWndproc);
 	assert(succ);
 }
@@ -682,7 +706,7 @@ JULayout::GroupboxWndProc(HWND hwndGroupbox, UINT msg, WPARAM wParam, LPARAM lPa
 		if(!hwndSib)
 			break;
 		
-		if(hwndSib!=hwndGroupbox) // only if not groupbox itself
+		if(!IsGroupBox(hwndSib)) // only if not a groupbox(hwndGroupbox itself or another sibling groupbox)
 		{
 			RECT rcScrn = {};
 			GetWindowRect(hwndSib, &rcScrn); // we need its width & height
@@ -697,6 +721,7 @@ JULayout::GroupboxWndProc(HWND hwndGroupbox, UINT msg, WPARAM wParam, LPARAM lPa
 			HRGN hrgnSib = CreateRectRgn(rcSib.left, rcSib.top, rcSib.right, rcSib.bottom);
 		
 			int rgntype = CombineRgn(hrgnClip, hrgnClip, hrgnSib, RGN_DIFF);
+			(void)rgntype;
 
 			DeleteObject(hrgnSib);
 
