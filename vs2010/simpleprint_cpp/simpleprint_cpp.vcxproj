@@ -149,7 +149,7 @@
 
       <PreprocessorDefinitions>;;WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 
-      <AdditionalIncludeDirectories>.;;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\__chjcxx\common-include\include;..\..\__WinConst;;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -200,6 +200,17 @@
    -->
   <ItemGroup>
     <ClCompile Include="simpleprint_cpp.cpp" />
+<!--
+    <ClCompile Include="..\..\__WinConst\itc\InterpretConst.cpp" />
+    <ClCompile Include="..\..\__WinConst\mswin\WinError.itc.cpp" />
+-->
+  </ItemGroup>
+
+  <ItemGroup>
+<!-- 
+    <ClInclude Include="..\..\__chjcxx\common-include\include\EnsureClnup_mswin.h" />
+    <ClInclude Include="..\..\__WinConst\mswin\WinError.itc.h" />
+-->
   </ItemGroup>
 
   <!-- MSBuild system stock Cpp.targets -->
