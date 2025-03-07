@@ -1,8 +1,9 @@
 #pragma once
 
-#include "targetver.h"
-
 #include <tchar.h>
+
+template<typename T> T Min(T x, T y) { return x<y ? x : y; }
+template<typename T> T Max(T x, T y) { return x>y ? x : y; }
 
 #define HANDLE_dlgMSG(hwnd, message, fn) \
   case (message): \
@@ -12,27 +13,26 @@
   // Ref: Raymond Chen https://devblogs.microsoft.com/oldnewthing/20031107-00/?p=41923
 
 TCHAR* now_timestr(TCHAR buf[], int bufchars, bool ymd=false, bool add_millisec=true);
-//
-extern "C++" 
-{
-	template <size_t _Size> inline TCHAR*
-	now_timestr(TCHAR (&buf)[_Size], bool ymd=false, bool add_millisec=true) throw() 
-	{
-		return now_timestr(buf, _Size, ymd, add_millisec); 
-	}
-}
-//__DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_2(TCHAR*, now_timestr, TCHAR, buf, bool, ymd, bool, add_millisec)
-// -- This is almost OK, except that it does NOT allow C++ function's default arguments.
-
-
-int vaMsgBox(HWND hwnd, UINT utype, const TCHAR *szTitle, const TCHAR *szfmt, ...);
-// -- utype: MB_OK|MB_ICONINFORMATION
-
-BOOL vaSetWindowText(HWND hwnd, const TCHAR *szfmt, ...);
-BOOL vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...);
-
-void vaAppendText_mled(HWND hedit, const TCHAR *szfmt, ...);
 
 void vaDbgTs(const TCHAR *fmt, ...);
 
 void vaDbgS(const TCHAR *fmt, ...);
+
+int vaMsgBox(HWND hwnd, UINT utype, const TCHAR *szTitle, const TCHAR *szfmt, ...);
+#define NULL_TITLE NULL // use for szTitle param
+
+BOOL vaSetWindowText(HWND hwnd, const TCHAR *szfmt, ...);
+
+BOOL vlSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, va_list args);
+BOOL vaSetDlgItemText(HWND hwnd, int nIDDlgItem, const TCHAR *szfmt, ...);
+
+void vlAppendText_mled(HWND hedit, const TCHAR *szfmt, va_list args);
+void vaAppendText_mled(HWND hedit, const TCHAR *szfmt, ...);
+
+typedef void PROC_WM_TIMER_call_once(void *usercontext);
+bool WM_TIMER_call_once(HWND hwnd, int delay_millisec, PROC_WM_TIMER_call_once *userproc, void *usercontext);
+
+unsigned __int64 get_qpf();
+unsigned __int64 get_qpc();
+
+DWORD TrueGetMillisec();
