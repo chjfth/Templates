@@ -76,7 +76,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CCCCCCCC-0000-0000-0000-111112000000}</ProjectGuid>
     <ProjectName>simpleprint_cpp</ProjectName>
-     <TargetName>$(ProjectName>)</TargetName>
+     <TargetName>$(ProjectName)</TargetName>
     <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   
