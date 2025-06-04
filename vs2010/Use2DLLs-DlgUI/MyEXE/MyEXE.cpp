@@ -30,15 +30,15 @@ struct DlgPrivate_st
 
 void Dlg_OnCommand(HWND hdlg, int id, HWND hwndCtl, UINT codeNotify) 
 {
-	DlgPrivate_st *prdata = (DlgPrivate_st*)GetWindowLongPtr(hdlg, DWLP_USER);
+	DlgPrivate_st &prdata = *(DlgPrivate_st*)GetWindowLongPtr(hdlg, DWLP_USER);
 	TCHAR textbuf[200];
 
 	switch (id) 
 	{{
 	case IDC_BUTTON1:
 	{
-		++(prdata->clicks);
-		_sntprintf_s(textbuf, _TRUNCATE, _T("Clicks: %d"), prdata->clicks);
+		++(prdata.clicks);
+		_sntprintf_s(textbuf, _TRUNCATE, _T("Clicks: %d"), prdata.clicks);
 		SetDlgItemText(hdlg, IDC_EDIT1, textbuf);
 
 		InvalidateRect(GetDlgItem(hdlg, IDC_LABEL1), NULL, TRUE);
@@ -85,15 +85,15 @@ BOOL Dlg_OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam)
 {
 	SNDMSG(hdlg, WM_SETICON, TRUE, (LPARAM)LoadIcon(GetWindowInstance(hdlg), MAKEINTRESOURCE(IDI_WINMAIN)));
 
-	DlgPrivate_st *prdata = (DlgPrivate_st*)lParam;
-	SetWindowLongPtr(hdlg, DWLP_USER, (LONG_PTR)prdata);
+	DlgPrivate_st &prdata = *(DlgPrivate_st*)lParam;
+	SetWindowLongPtr(hdlg, DWLP_USER, (LONG_PTR)&prdata);
 	
 	TCHAR textbuf[200];
 	_sntprintf_s(textbuf, _TRUNCATE, _T("version: %d.%d.%d"), 
 		MyEXE_VMAJOR, MyEXE_VMINOR, MyEXE_VPATCH);
 	SetDlgItemText(hdlg, IDC_LABEL1, textbuf);
 	
-//	SetDlgItemText(hdlg, IDC_EDIT1, prdata->mystr);
+//	SetDlgItemText(hdlg, IDC_EDIT1, prdata.mystr);
 
 	Dlg_EnableJULayout(hdlg);
 
