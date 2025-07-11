@@ -1,0 +1,28 @@
+#include "iversion.h"
+
+1 VERSIONINFO
+FileVersion    DialogAsMainUICxx_VMAJOR, DialogAsMainUICxx_VMINOR, DialogAsMainUICxx_VPATCH, DialogAsMainUICxx_VTAIL
+ProductVersion DialogAsMainUICxx_VMAJOR, DialogAsMainUICxx_VMINOR, DialogAsMainUICxx_VPATCH, DialogAsMainUICxx_VTAIL
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "040904E4"
+        //language ID = U.S. English, char set = Windows, Multilingual
+        {
+            VALUE "CompanyName", "Public Domain"
+            VALUE "ProductName",     DialogAsMainUICxx_NAME
+            VALUE "FileDescription", DialogAsMainUICxx_NAME
+            VALUE "FileVersion",    DialogAsMainUICxx_VMAJORs "." DialogAsMainUICxx_VMINORs "." DialogAsMainUICxx_VPATCHs
+            VALUE "ProductVersion",    DialogAsMainUICxx_VMAJORs "." DialogAsMainUICxx_VMINORs "." DialogAsMainUICxx_VPATCHs
+            VALUE "LegalCopyright",    "Public domain"
+            VALUE "OriginalFilename" , DialogAsMainUICxx_NAME ".exe"
+            VALUE "InternalName", DialogAsMainUICxx_NAME ".exe"
+            VALUE "Comments","Presented by public domain"
+        }
+    }
+
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x0409, 1252
+    }
+}
