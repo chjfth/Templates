@@ -30,6 +30,13 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // remains consistent on all systems.
 1                       ICON                    "HelloWinX.ico"
 
+
+
+
+
+
+
+
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
