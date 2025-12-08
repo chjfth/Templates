@@ -1,6 +1,9 @@
 #ifndef __MyLibname_h_YYYYMMDD_
 #define __MyLibname_h_YYYYMMDD_
 
+#include <InterpretConst.h>
+
+namespace itc {
 
 /*
 
@@ -29,10 +32,9 @@ extern CInterpretConst YYY;
 //
 #if defined(MyLibname_IMPL) || (defined CHHI_ALL_IMPL && !defined CHHI_ALL_IMPL_HIDE_MyLibname) // [IMPL]
 
+// More ctor reference: My evclip 20250411.v1
 
 /*
-
-Reference: My evclip 20250411.v1
 
 const Enum2Val_st _e2v_XXX[] =
 {
@@ -58,5 +60,8 @@ CInterpretConst YYY(_b2v_YYY, ITCF_HEX4B);
 
 
 #endif // [IMPL]
+
+
+} // namespace itc
 
 #endif // __MyLibname_h_YYYYMMDD_
