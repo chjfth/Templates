@@ -41,7 +41,7 @@ int MyLibname_getversion();
 ////////////////////////////////////////////////////////////////////////////
 */
 // ++++++++++++++++++ Implementation Below ++++++++++++++++++
-// (private namespace 'CHHI_Itc') 
+// (private namespace 'CHHI_MyLibname') 
 
 
 #if defined(MyLibname_IMPL) || (defined CHHI_ALL_IMPL && !defined CHHI_ALL_IMPL_HIDE_MyLibname) // [IMPL]
