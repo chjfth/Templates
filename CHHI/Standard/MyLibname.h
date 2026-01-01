@@ -58,7 +58,7 @@ int MyLibname_getversion();
 
 
 #ifndef MyLibname_DEBUG
-#include <CHHI_vaDBG_hide.h> // Now hide vaDBG macro
+#include <CHHI_vaDBG_hide.h> // Suppress/invalidate vaDBG macro, from now on
 #endif
 
 
