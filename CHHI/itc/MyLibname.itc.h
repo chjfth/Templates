@@ -15,7 +15,7 @@ extern CInterpretConst YYY;
 
 */
 
-
+} // namespace itc
 
 
 /*
@@ -30,7 +30,14 @@ extern CInterpretConst YYY;
 */
 // ++++++++++++++++++ Implementation Below ++++++++++++++++++
 //
-#if defined(MyLibname_IMPL) || (defined CHHI_ALL_IMPL && !defined CHHI_ALL_IMPL_HIDE_MyLibname) // [IMPL]
+#if defined(MyLibname_IMPL) || (defined CHHI_ALL_IMPL && !defined CHHI_ALL_IMPL_HIDE_MyLibname) // [IMPL] begin
+// [IMPL] //
+// [IMPL] //
+// Include system/OS headers here
+#include <stdio.h>
+// [IMPL] //
+// [IMPL] //
+namespace itc {
 
 // More ctor reference: My evclip 20250411.v1
 
@@ -59,9 +66,10 @@ CInterpretConst YYY(_b2v_YYY, ITCF_HEX4B);
 */
 
 
-#endif // [IMPL]
-
-
 } // namespace itc
+// [IMPL] //
+// [IMPL] //
+#endif // [IMPL] end
+
 
 #endif // __MyLibname_h_YYYYMMDD_
