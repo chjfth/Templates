@@ -3,6 +3,7 @@
 
 
 // Include OS headers to provide OS-specific data-types used in API prototype.
+// But do not include Implementation-code depending headers.
 // Example:
 // <windows.h> provides DWORD
 // <unistd.h> provides pid_t, off64_t
@@ -41,7 +42,6 @@ int MyLibname_getversion();
 ////////////////////////////////////////////////////////////////////////////
 */
 // ++++++++++++++++++ Implementation Below ++++++++++++++++++
-// (private namespace 'CHHI_MyLibname') 
 
 
 #if defined(MyLibname_IMPL) || (defined CHHI_ALL_IMPL && !defined CHHI_ALL_IMPL_HIDE_MyLibname) // [IMPL]
@@ -77,6 +77,7 @@ int MyLibname_getversion();
 ////////////////////////////////////////////////////////////////////////////
 namespace CHHI_MyLibname { 
 ////////////////////////////////////////////////////////////////////////////
+// (private namespace 'CHHI_MyLibname') 
 
 
 
