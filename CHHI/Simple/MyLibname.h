@@ -1,5 +1,5 @@
-#ifndef __MyLibname_h_YYYYMMDD_
-#define __MyLibname_h_YYYYMMDD_
+#ifndef CHHI__MyLibname_h_YYYYMMDD_
+#define CHHI__MyLibname_h_YYYYMMDD_
 
 
 
@@ -33,4 +33,4 @@ int MyLibname_getversion()
 
 #endif // [IMPL]
 
-#endif // __MyLibname_h_YYYYMMDD_
+#endif // CHHI__MyLibname_h_YYYYMMDD_

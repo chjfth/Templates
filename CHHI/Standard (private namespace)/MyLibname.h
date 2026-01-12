@@ -1,5 +1,5 @@
-#ifndef __MyLibname_h_YYYYMMDD_
-#define __MyLibname_h_YYYYMMDD_
+#ifndef CHHI__MyLibname_h_YYYYMMDD_
+#define CHHI__MyLibname_h_YYYYMMDD_
 
 
 // Include OS headers to provide OS-specific data-types used in API prototype.
@@ -129,4 +129,4 @@ int MyLibname_getversion()
 #endif // [IMPL]
 
 
-#endif // __MyLibname_h_YYYYMMDD_
+#endif // CHHI__MyLibname_h_YYYYMMDD_

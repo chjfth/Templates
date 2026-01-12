@@ -1,5 +1,5 @@
-#ifndef __MyLibname_h_YYYYMMDD_
-#define __MyLibname_h_YYYYMMDD_
+#ifndef CHHI__MyLibname_h_YYYYMMDD_
+#define CHHI__MyLibname_h_YYYYMMDD_
 
 #include <InterpretConst.h>
 
@@ -72,4 +72,4 @@ CInterpretConst YYY(_b2v_YYY, ITCF_HEX4B);
 #endif // [IMPL] end
 
 
-#endif // __MyLibname_h_YYYYMMDD_
+#endif // CHHI__MyLibname_h_YYYYMMDD_
