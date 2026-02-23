@@ -8,12 +8,27 @@
 
 #include "iversion.h"
 
+#if 10000
+// For standalone use
 #include "utils.h"
 
 #define JULAYOUT_IMPL
 #include "JULayout2.h"
 
+#else
+// For use in chj git-repo dir-tree
+#define CHHI_ALL_IMPL
+#include <mswin/JULayout2.h>
+
+#include <vaDbgTs.h>
+#include <mswin/utils_env.h>
+#include <mswin/utils_wingui.h>
+
+#endif // 10000
+
+
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+
 
 HINSTANCE g_hinstExe;
 
