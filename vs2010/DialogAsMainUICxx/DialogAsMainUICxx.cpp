@@ -41,7 +41,7 @@ public:
 
 	virtual INT_PTR DialogProc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-public:
+protected:
 	void OnCommand(HWND hdlg, int id, HWND hwndCtl, UINT codeNotify);
 	BOOL OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam);
 
