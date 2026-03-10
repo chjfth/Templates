@@ -4,4 +4,5 @@
 // #define CHHI_ALL_IMPL
 // or
 #define MyLibname_IMPL
+// #define MyLibname_DEBUG // enable this if you want debug info
 #include "MyLibname.h"
