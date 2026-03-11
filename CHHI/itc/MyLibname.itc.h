@@ -1,5 +1,5 @@
-#ifndef CHHI__MyLibname_h_YYYYMMDD_
-#define CHHI__MyLibname_h_YYYYMMDD_
+#ifndef __CHHI__MyLibname_h_YYYYMMDD_
+#define __CHHI__MyLibname_h_YYYYMMDD_
 
 #include <InterpretConst.h>
 

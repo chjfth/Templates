@@ -1,5 +1,5 @@
-#ifndef CHHI__MyLibname_h_YYYYMMDD_
-#define CHHI__MyLibname_h_YYYYMMDD_
+#ifndef __CHHI__MyLibname_h_YYYYMMDD_
+#define __CHHI__MyLibname_h_YYYYMMDD_
 
 
 // Include OS headers to provide OS-specific data-types used in API prototype.
