@@ -18,11 +18,12 @@
 #else
 // For use in chj git-repo dir-tree
 #define CHHI_ALL_IMPL
-#include <mswin/JULayout2.h>
 
+// These .h are from __chjcxx git-module
 #include <vaDbgTs.h>
 #include <mswin/utils_env.h>
 #include <mswin/utils_wingui.h>
+#include <mswin/JULayout2.h>
 
 #endif // 10000
 
