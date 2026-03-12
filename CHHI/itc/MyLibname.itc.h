@@ -30,7 +30,7 @@ extern CInterpretConst YYY;
 */
 // ++++++++++++++++++ Implementation Below ++++++++++++++++++
 //
-#if defined(MyLibname_IMPL) || (defined CHHI_ALL_IMPL && !defined CHHI_ALL_IMPL_HIDE_MyLibname) // [IMPL] begin
+#if defined(MyLibname_itc_IMPL) || (defined CHHI_ALL_IMPL && !defined CHHI_ALL_IMPL_HIDE_MyLibname_itc) // [IMPL] begin
 // [IMPL] //
 // [IMPL] //
 // Include system/OS headers here
