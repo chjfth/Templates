@@ -72,4 +72,4 @@ CInterpretConst YYY(_b2v_YYY, ITCF_HEX4B);
 #endif // [IMPL] end
 
 
-#endif // CHHI__MyLibname_h_YYYYMMDD_
+#endif // include once guard

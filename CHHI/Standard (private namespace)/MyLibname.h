@@ -129,4 +129,4 @@ int MyLibname_getversion()
 #endif // [IMPL]
 
 
-#endif // CHHI__MyLibname_h_YYYYMMDD_
+#endif // include once guard
