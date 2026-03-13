@@ -28,14 +28,14 @@
 #endif // 10000
 
 
-#include "CxxDialog.h"
+#include "CxxDialogBase.h"
 
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 
 HINSTANCE g_hinstExe;
 
-class MainDialog : public CxxDialog
+class MainDialog : public CxxDialogBase
 {
 public:
 	MainDialog(LPCTSTR mystr);
