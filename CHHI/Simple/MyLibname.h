@@ -1,5 +1,7 @@
-#ifndef __CHHI__MyLibname_h_YYYYMMDD_
-#define __CHHI__MyLibname_h_YYYYMMDD_
+#ifndef __CHHI__MyLibname_h_
+#define __CHHI__MyLibname_h_
+#define __CHHI__MyLibname_h_created_ YYYYMMDD
+#define __CHHI__MyLibname_h_updated_ YYYYMMDD
 
 
 
