@@ -77,9 +77,9 @@ int MyLibname_getversion();
 // We should enclose this lib's implementation into private namespace.
 
 ////////////////////////////////////////////////////////////////////////////
-namespace CHHI_MyLibname {
+namespace CHHI_internal {
 ////////////////////////////////////////////////////////////////////////////
-// (private namespace 'CHHI_MyLibname') 
+// (private namespace 'CHHI_internal') 
 
 
 
@@ -98,7 +98,7 @@ int MyLibname_getversion()
 
 
 ////////////////////////////////////////////////////////////////////////////
-} // namespace CHHI_MyLibname
+} // namespace CHHI_internal
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -115,7 +115,7 @@ int MyLibname_getversion()
 
 int MyLibname_getversion()
 {
-	return CHHI_MyLibname::MyLibname_getversion();
+	return CHHI_internal::MyLibname_getversion();
 }
 
 

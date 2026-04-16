@@ -4,16 +4,16 @@ class MyClass
 {
 public:
 	// boilerplate code, no need to modify >>>
-	MyClass() {	_ct0r(); }            //////////////
+	MyClass() { _ct0r(); }            //////////////
 	virtual ~MyClass()                //////////////
-	{                                 //////////////                    
+	{                                 //////////////
 		_dtor();                      //////////////
 		_ct0r();                      //////////////
 	}                                 //////////////
 	MyClass(const MyClass& old)            // copy-ctor
-	{                                      /////////////
-		_copy_from_old(old);               /////////////
-	}                                      /////////////
+	{                                      //////////////
+		_copy_from_old(old);               //////////////
+	}                                      //////////////
 	MyClass& operator=(const MyClass& old) // copy-assign
 	{                                      //////////////
 		if (this != &old) {                //////////////
