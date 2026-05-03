@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RemoteDebuggerWorkingDirectory>D:\barn\$(Platform)\__$(Configuration)</RemoteDebuggerWorkingDirectory>
+    <RemoteDebuggerCommand>$(RemoteDebuggerWorkingDirectory)\$(TargetFileName)</RemoteDebuggerCommand>
+    <!-- 
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    or
+    <DebuggerFlavor>WindowsRemoteDebugger</DebuggerFlavor>
+    <RemoteDebuggerServerName>10.22.3.22</RemoteDebuggerServerName>
+    -->
+    <RemoteDebuggerConnection>RemoteWithoutAuthentication</RemoteDebuggerConnection>
+  </PropertyGroup>
+</Project>

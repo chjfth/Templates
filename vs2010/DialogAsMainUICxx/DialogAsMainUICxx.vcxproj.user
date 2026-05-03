@@ -4,10 +4,11 @@
     <RemoteDebuggerWorkingDirectory>D:\barn\$(Platform)\__$(Configuration)</RemoteDebuggerWorkingDirectory>
     <RemoteDebuggerCommand>$(RemoteDebuggerWorkingDirectory)\$(TargetFileName)</RemoteDebuggerCommand>
     <!-- 
-    <RemoteDebuggerServerName>10.22.3.22</RemoteDebuggerServerName>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    or
+    <DebuggerFlavor>WindowsRemoteDebugger</DebuggerFlavor>
+    <RemoteDebuggerServerName>10.22.3.22</RemoteDebuggerServerName>
     -->
     <RemoteDebuggerConnection>RemoteWithoutAuthentication</RemoteDebuggerConnection>
   </PropertyGroup>
 </Project>
-
