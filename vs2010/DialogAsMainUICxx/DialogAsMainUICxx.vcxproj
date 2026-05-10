@@ -164,7 +164,7 @@
 
       <PreprocessorDefinitions>;;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 
-      <AdditionalIncludeDirectories>.;..;..\..\__chjcxx\common-include\include\mswin;..\..\__chjcxx\common-include\include;..\..\__WinConst;;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\devdbg;.;..;..\..\__chjcxx\common-include\include\mswin;..\..\__chjcxx\common-include\include;..\..\__WinConst;;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
