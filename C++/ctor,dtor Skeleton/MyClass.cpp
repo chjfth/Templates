@@ -3,7 +3,7 @@
 class MyClass
 {
 public:
-	// boilerplate code, no need to modify >>>
+	// boilerplate ctor/dtor code, no need to modify >>>
 	MyClass() { _ct0r(); }            //////////////
 	virtual ~MyClass()                //////////////
 	{                                 //////////////
@@ -36,7 +36,7 @@ public:
 		}                             //////////////
 		return *this;                 //////////////
 	}                                 //////////////
-	// boilerplate code, no need to modify <<<
+	// boilerplate ctor/dtor code, no need to modify <<<
 
 private:
 	void _copy_from_old(const MyClass& old) {
