@@ -1,6 +1,6 @@
 #if 0
 
-// Actual developer can copy these to his own $prjdir/devdbg/CHHI_DEBUG.h 
+// Actual developer can copy these to his own $prjdir/_devdbg/CHHI_DEBUG.h 
 // (except that change `#if 0` to `#if 1`).
 
 #undef NDEBUG // always enable assert()
