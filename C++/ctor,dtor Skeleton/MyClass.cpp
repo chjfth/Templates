@@ -4,8 +4,12 @@ class MyClass
 {
 public:
 	// boilerplate ctor/dtor code, no need to modify >>>
-	MyClass() { _ct0r(); }            //////////////
-	virtual ~MyClass()                //////////////
+	MyClass()                         // ctor
+	{                                 //////////////
+		_ct0r();                      //////////////
+		_ctor_init_once();            //////////////
+	}                                 //////////////
+	virtual ~MyClass()                // dtor
 	{                                 //////////////
 		_dtor();                      //////////////
 		_ct0r();                      //////////////
@@ -38,35 +42,35 @@ public:
 	}                                 //////////////
 	// boilerplate ctor/dtor code, no need to modify <<<
 
-private:
+public:
+	// ... more public methods here ...
+
+private: 
+	// ct0r-style supplementary
+	void _ct0r() {
+		m_buf = nullptr;
+	}
+	void _ctor_init_once() {
+		m_buf = new char[1];
+	}
+	void _dtor() {
+		delete[] m_buf;
+	}
 	void _copy_from_old(const MyClass& old) {
 		if(old.m_buf) 
 			m_buf = new char[1], m_buf[0] = old.m_buf[0];
 		else
 			m_buf = nullptr;
 	}
-
 	void _steal_from_old(MyClass& old) {
 		m_buf = old.m_buf;
 	}
 
-public:
-	// ... more public methods here ...
-
 	//
-	// Leave below at end of class body
+	// Leave data members at end of class body
 	//
-private: // data members
-	char* m_buf;
-
 private:
-	void _ct0r() {
-		m_buf = nullptr;
-	}
-
-	void _dtor() {
-		delete[] m_buf;
-	}
+	char* m_buf;
 };
 
 
