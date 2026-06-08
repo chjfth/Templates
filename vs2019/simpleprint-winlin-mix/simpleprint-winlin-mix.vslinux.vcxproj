@@ -269,7 +269,7 @@
 
       <AdditionalIncludeDirectories>.\_devdbg;.;..\..\__chjcxx\common-include\include\mswin;..\..\__chjcxx\common-include\include;..\..\__WinConst;;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Condition=" $(Configuration.Contains('msvc'))" Label="Configuration">
+    <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>    
     <Link>
