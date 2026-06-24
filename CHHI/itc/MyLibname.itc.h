@@ -9,11 +9,11 @@ namespace itc {
 
 /*
 
-extern CInterpretConst XXX;
+extern const CInterpretConst& XXX();
 
 extern const SingleBit2Val_st _b2v_YYY[];
 extern const int N_b2v_YYY;
-extern CInterpretConst YYY;
+extern const CInterpretConst& YYY();
 
 */
 
@@ -51,7 +51,7 @@ const Enum2Val_st _e2v_XXX[] =
     ITC_NAMEPAIR(NM_CLICK               ), // -2
     ITC_NAMEPAIR(NM_DBLCLK              ), // -3
 };
-CInterpretConst XXX(_e2v_XXX, ITCF_SINT);
+ITC_MAKE_OBJECT(XXX, _e2v_XXX, ITCF_SINT)
 
 
 const SingleBit2Val_st _b2v_YYY[] =
@@ -63,7 +63,7 @@ const SingleBit2Val_st _b2v_YYY[] =
     ITC_NAMEPAIR(SYNCHRONIZE),  //   (0x00100000L)
 };
 const int N_b2v_YYY = ARRAYSIZE(_b2v_YYY);
-CInterpretConst YYY(_b2v_YYY, ITCF_HEX4B);
+ITC_MAKE_OBJECT(YYY, _b2v_YYY, ITCF_HEX4B)
 
 */
 
