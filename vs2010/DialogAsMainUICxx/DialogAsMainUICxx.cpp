@@ -40,11 +40,13 @@ class MainDialog : public CxxDialogBase
 public:
 	MainDialog(LPCTSTR mystr);
 
-	virtual INT_PTR DialogProc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual INT_PTR DialogProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 protected:
-	void OnCommand(HWND hdlg, int id, HWND hwndCtl, UINT codeNotify);
+	// Note: This OnXXX functions needs to have `HWND dlg` as first param, because 
+	// WindowsX.h's HANDLE_WM_xxx(HANDLE_WM_INITDIALOG, HANDLE_WM_COMMAND etc) requires it. 
 	BOOL OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam);
+	void OnCommand(HWND hdlg, int id, HWND hwndCtl, UINT codeNotify);
 
 private:
 	const TCHAR *m_mystr;
@@ -91,6 +93,7 @@ static void Dlg_EnableJULayout(HWND hdlg)
 
 BOOL MainDialog::OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam) 
 {
+	assert(hdlg==m_hwndDlg);
 	SNDMSG(hdlg, WM_SETICON, TRUE, (LPARAM)LoadIcon(GetWindowInstance(hdlg), MAKEINTRESOURCE(IDI_WINMAIN)));
 
 	vaSetDlgItemText(hdlg, IDC_LABEL1, _T("version: %d.%d.%d"), 
@@ -104,8 +107,9 @@ BOOL MainDialog::OnInitDialog(HWND hdlg, HWND hwndFocus, LPARAM lParam)
 	return FALSE; // FALSE to let Dlg-manager respect our SetFocus().
 }
 
-INT_PTR MainDialog::DialogProc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam) 
+INT_PTR MainDialog::DialogProc(UINT uMsg, WPARAM wParam, LPARAM lParam) 
 {
+	HWND hdlg = m_hwndDlg;
 	switch (uMsg) 
 	{
 		HANDLE_dlgMSG(hdlg, WM_INITDIALOG,    OnInitDialog);

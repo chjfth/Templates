@@ -7,15 +7,15 @@
 
 class CxxDialogBase
 {
+protected:
+	HWND m_hwndDlg;
+
 public:
-	CxxDialogBase()
-	{
-		m_hwndDlg = NULL;
-	}
+	CxxDialogBase() { m_hwndDlg = NULL; }
 
 public:
 	// User overrides this virtual function to do dlgbox message processing.
-	virtual INT_PTR DialogProc(HWND hdlg, UINT uMsg, WPARAM wParam, LPARAM lParam) = 0;
+	virtual INT_PTR DialogProc(UINT uMsg, WPARAM wParam, LPARAM lParam) = 0;
 
 public:
 	INT_PTR DialogBoxParam(HINSTANCE hInstance, LPCTSTR lpTemplateName, HWND hWndParent)
@@ -42,9 +42,6 @@ public:
 		MoveWindow(m_hwndDlg, x, y, rc.right-rc.left, rc.bottom-rc.top, TRUE);
 	}
 
-protected:
-	HWND m_hwndDlg;
-
 private:
 	static INT_PTR CALLBACK s_DialogProc(HWND hdlg,
 		UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -70,7 +67,7 @@ private:
 			// e.g. WM_SETFONT .
 
 			// Call virtual function.
-			ret = pdlg->DialogProc(hdlg, uMsg, wParam, lParam);
+			ret = pdlg->DialogProc(uMsg, wParam, lParam);
 		}
 
 		return ret;
