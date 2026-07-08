@@ -13,13 +13,14 @@
 
 
 // concrete xxx_DEBUG macros for various CHHI libraries/modules (examples):
-#define DigClock2_DEBUG
+#define MyLibname_DEBUG
 #define Editbox_EnableKbdAdjustNumber_DEBUG
 #define SimpleIni_DEBUG
 #define SimpleIniEx_DEBUG
 #define DataXIni_DEBUG
 
-// User .cpp often need this:
+// User .cpp often needs this:
+// #define CHHI_ALL_IMPL
 // #include <CHHI_vaDBG_is_vaDbgTs.h>
 
 
