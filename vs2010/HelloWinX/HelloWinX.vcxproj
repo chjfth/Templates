@@ -212,7 +212,6 @@
    -->
   <ItemGroup>
     <ClCompile Include="HelloWinX.cpp" />
-    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HelloWinX.rc" />
@@ -222,7 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="utils.h" />
   </ItemGroup>
   
   <!-- MSBuild system stock Cpp.targets -->

@@ -19,7 +19,6 @@ link /debug HelloWinX.obj HelloWinX.res kernel32.lib user32.lib gdi32.lib
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "utils.h"
 
 LRESULT CALLBACK WndProc (HWND, UINT, WPARAM, LPARAM) ;
 
