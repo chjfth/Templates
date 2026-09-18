@@ -1,6 +1,6 @@
 #if 0
 
-// Actual developer can copy these to his own $prjdir/_devdbg/CHHI_DEBUG.h 
+// Actual developer can copy these to his own $prjdir\_devdbg\CHHI_DEBUG.h 
 // (and remember to change `#if 0` to `#if 1`)
 
 #undef NDEBUG // always enable assert()
@@ -19,7 +19,7 @@
 #define SimpleIniEx_DEBUG
 #define DataXIni_DEBUG
 
-// User .cpp often needs this:
+// User CHHI.cpp often needs this:
 // #define CHHI_ALL_IMPL
 // #include <CHHI_vaDBG_is_vaDbgTs.h>
 
