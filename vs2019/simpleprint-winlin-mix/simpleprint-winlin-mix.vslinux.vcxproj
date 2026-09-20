@@ -400,23 +400,25 @@
   </ImportGroup>
 
   <!-- import VSPG start -->
-								  <!-- 
   <PropertyGroup>
-    <VSPG_BootsDir_NoTBS>..\_VSPG\boots</VSPG_BootsDir_NoTBS>
+    <trydir>..\..\__VSPG\_VSPG\boots</trydir>
+    		<VSPG_BootsDir_NoTBS Condition="exists('$(trydir)\_VSPG.props')">$(trydir)</VSPG_BootsDir_NoTBS>
+    <trydir>$(SolutionDir)_VSPG\boots</trydir>
+    		<VSPG_BootsDir_NoTBS Condition="exists('$(trydir)\_VSPG.props')">$(trydir)</VSPG_BootsDir_NoTBS>
+    <!-- Note: VSPG_BootsDir_NoTBS is a required varname in _VSPG.props, since v615. -->
   </PropertyGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(VSPG_BootsDir_NoTBS)\_VSPG.props" Condition="exists('$(VSPG_BootsDir_NoTBS)\_VSPG.props')"/>
   </ImportGroup>
-  									-->
   <!-- import VSPG end -->
 
-  <!-- below code is just for test -->
+  <!-- just for test >>> 
   <Target Name="test1_PreBuild" BeforeTargets="PreBuildEvent">
     <Message Text='Pre: ResolvedRemoteTarget=$(ResolvedRemoteTarget)'/>
   </Target>
   <Target Name="test2_PostBuild" AfterTargets="PostBuildEvent">
     <Message Text='Post: ResolvedRemoteTarget=$(ResolvedRemoteTarget)'/>
   </Target>
-  
+    -- just for test <<< -->
   
 </Project>
