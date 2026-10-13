@@ -11,6 +11,7 @@ protected:
 	HWND m_hwndDlg;
 
 public:
+	virtual ~CxxDialogBase() {}
 	CxxDialogBase() { m_hwndDlg = NULL; }
 
 public:

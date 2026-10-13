@@ -80,7 +80,7 @@
   <!-- User project properties -->
   
   <PropertyGroup Label="Configuration">
-    <ProjectGuid>{20261013-0000-0000-0000-202610130000}</ProjectGuid>
+    <ProjectGuid>{CCCCCCCC-0000-0000-0001-202610130000}</ProjectGuid>
     <ProjectName>HelloWinCxx</ProjectName>
      <TargetName>$(ProjectName)</TargetName>
     <ConfigurationType>Application</ConfigurationType>
@@ -214,13 +214,14 @@
     <ClCompile Include="HelloWinCxx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CxxRawWinBase.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ResourceCompile Include="HelloWinCxx.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="HelloWinCxx.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   
   <!-- MSBuild system stock Cpp.targets -->
