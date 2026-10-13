@@ -14,12 +14,20 @@ link /debug HelloWinCxx.obj HelloWinCxx.res kernel32.lib user32.lib gdi32.lib
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <windowsx.h>
+#include <ShellAPI.h>
 #include <tchar.h>
 #include <assert.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+// #define DO_CHECK_MEMLEAK
+#ifdef DO_CHECK_MEMLEAK
+#include <msvc_extras.h>
+#endif
 
 #include "CxxRawWinBase.h"
+
 
 class CAppWin : public CxxRawWinBase
 {
@@ -31,12 +39,11 @@ public:
 	void Cls_OnPaint(HWND hwnd);
 	void Cls_OnDestroy(HWND hwnd)
 	{
-		PostQuitMessage(44);
+		PostQuitMessage(0);
 	}
 };
 
-int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
-					PTSTR szCmdLine, int nCmdShow)
+int WINAPI in_WinMain(int argc, const TCHAR *argv[])
 {
 	static TCHAR szAppName[] = TEXT ("HelloWinCxx") ;
 
@@ -53,6 +60,39 @@ int WINAPI _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	return (int)msg.wParam; // the value N told by PostQuitMessage(N);
 }
+
+int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					PTSTR szCmdLine, int nCmdShow)
+{
+	int argc = __argc;
+#ifdef UNICODE
+	PCTSTR* argv = (PCTSTR*) CommandLineToArgvW(GetCommandLine(), &argc);
+#else
+	PCTSTR* argv = (PCTSTR*) __argv;
+#endif
+	// Use argc and argv[] below, just like what traditional main() does.
+
+#ifdef DO_CHECK_MEMLEAK
+	MSVCRT_MemCheckStart(foo);
+#endif
+
+	int ret = in_WinMain(argc, argv);
+
+#ifdef DO_CHECK_MEMLEAK
+	bool isleak = MSVCRT_MemCheckEnd_IsLeak(foo);
+	if (isleak) {
+		OutputDebugString(_T("Suspect memleak in my C++ code.\n"));
+		return ret ? 4 : ret;
+	}
+	else {
+		OutputDebugString(_T("No memleak.\n"));
+		return ret;
+	}
+#else
+	return ret;
+#endif
+}
+
 
 BOOL CAppWin::Cls_OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
 {
