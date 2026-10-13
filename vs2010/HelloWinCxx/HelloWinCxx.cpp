@@ -26,6 +26,8 @@ link /debug HelloWinCxx.obj HelloWinCxx.res kernel32.lib user32.lib gdi32.lib
 #include <msvc_extras.h>
 #endif
 
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+
 #include "CxxRawWinBase.h"
 
 
@@ -41,9 +43,12 @@ public:
 	{
 		PostQuitMessage(0);
 	}
+
+private:
+	// private program states here.
 };
 
-int WINAPI in_WinMain(int argc, const TCHAR *argv[])
+int in_WinMain(int argc, const TCHAR *argv[])
 {
 	static TCHAR szAppName[] = TEXT ("HelloWinCxx") ;
 

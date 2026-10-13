@@ -1,9 +1,11 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <windowsx.h>
+#include <ShellAPI.h>
 #include <CommCtrl.h>
 #include <tchar.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "resource.h"
 
 #include "iversion.h"
@@ -20,6 +22,7 @@
 #define CHHI_ALL_IMPL
 
 // These .h are from __chjcxx git-module
+#include <msvc_extras.h>
 #include <vaDbgTs.h>
 #include <mswin/utils_env.h>
 #include <mswin/utils_wingui.h>
@@ -32,8 +35,6 @@
 
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
-
-HINSTANCE g_hinstExe;
 
 class MainDialog : public CxxDialogBase
 {
@@ -119,9 +120,9 @@ INT_PTR MainDialog::DialogProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 }
 
 
-int WINAPI _tWinMain(HINSTANCE hinstExe, HINSTANCE, PTSTR szParams, int) 
+int in_WinMain(int argc, const TCHAR *argv[])
 {
-	g_hinstExe = hinstExe;
+	HINSTANCE hinstExe = GetModuleHandle(NULL);
 
 	InitCommonControls(); // WinXP requires this, to work with Visual-style manifest
 
@@ -132,4 +133,36 @@ int WINAPI _tWinMain(HINSTANCE hinstExe, HINSTANCE, PTSTR szParams, int)
 	dlg.DialogBoxParam(hinstExe, MAKEINTRESOURCE(IDD_WINMAIN), NULL);
 
 	return 0;
+}
+
+int WINAPI _tWinMain(HINSTANCE hinstExe, HINSTANCE, PTSTR szParams, int) 
+{
+	int argc = __argc;
+#ifdef UNICODE
+	PCTSTR* argv = (PCTSTR*) CommandLineToArgvW(GetCommandLine(), &argc);
+#else
+	PCTSTR* argv = (PCTSTR*) __argv;
+#endif
+	// Use argc and argv[] below, just like what traditional main() does.
+
+#ifdef __msvc_extras_h_
+	MSVCRT_MemCheckStart(foo);
+#endif
+
+	int ret = in_WinMain(argc, argv);
+
+#ifdef __msvc_extras_h_
+	bool isleak = MSVCRT_MemCheckEnd_IsLeak(foo);
+	if (isleak) {
+		OutputDebugString(_T("Suspect memleak in my C++ code.\n"));
+		return ret ? 4 : ret;
+	}
+	else {
+		OutputDebugString(_T("No memleak.\n"));
+		return ret;
+	}
+#else
+	return ret;
+#endif
+
 }
