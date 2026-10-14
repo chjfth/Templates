@@ -1,5 +1,7 @@
-#ifndef __CxxDialogBase_h_20260313_
-#define __CxxDialogBase_h_20260313_
+#ifndef __CxxDialogBase_h_
+#define __CxxDialogBase_h_
+#define __CxxDialogBase_h_created_ 20260313
+#define __CxxDialogBase_h_updated_ 20260313
 
 #include <assert.h>
 #include <tchar.h>

@@ -1,5 +1,7 @@
 #ifndef __CxxRawWinBase_h_
 #define __CxxRawWinBase_h_
+#define __CxxRawWinBase_h_created_ 20261013
+#define __CxxRawWinBase_h_updated_ 20261013
 
 #include <assert.h>
 #include <tchar.h>
@@ -18,6 +20,8 @@ public:
 		m_hwnd = NULL;
 	}
 
+	HWND Hwnd() { return m_hwnd; }
+
 public:
 	
 	// User can override this to customize register-class and window-create.
@@ -27,8 +31,8 @@ public:
 
 		WNDCLASS     wndclass = {};
 
-		wndclass.style         = CS_HREDRAW | CS_VREDRAW ;
-		wndclass.lpfnWndProc   = s_WndProc ; // MUST preserve this
+		wndclass.style         = CS_HREDRAW | CS_VREDRAW;
+		wndclass.lpfnWndProc   = CxxRawWinBase::s_WndProc; // MUST preserve this
 		wndclass.cbClsExtra    = 0 ;
 		wndclass.cbWndExtra    = 0 ;
 		wndclass.hInstance     = hInstance;
@@ -90,6 +94,8 @@ protected:
 		if(uMsg==WM_NCCREATE)
 		{
 			pwnd = (CxxRawWinBase*)((CREATESTRUCT*)lParam)->lpCreateParams;
+			assert(pwnd);
+
 			SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)pwnd);
 
 			pwnd->m_hwnd = hwnd;
