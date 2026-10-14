@@ -116,7 +116,7 @@ INT_PTR MainDialog::DialogProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		HANDLE_dlgMSG(hdlg, WM_INITDIALOG,    OnInitDialog);
 		HANDLE_dlgMSG(hdlg, WM_COMMAND,       OnCommand);
 	}
-	return FALSE;
+	return FALSE; // Let DlgMan do default for current message.
 }
 
 
