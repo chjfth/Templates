@@ -418,6 +418,7 @@
   <Target Name="test2_PostBuild" AfterTargets="PostBuildEvent">
     <Message Text='Post: ResolvedRemoteTarget=$(ResolvedRemoteTarget)'/>
   </Target>
-    -- just for test <<< -->
+       just for test <<< 
+  -->
   
 </Project>
